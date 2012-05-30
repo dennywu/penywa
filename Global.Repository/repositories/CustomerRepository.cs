@@ -8,16 +8,21 @@ using Global.Repository.models;
 
 namespace Global.Repository
 {
-    public class AccountRepository : IAccountRepository
+    public class CustomerRepository : ICustomerRepository
     {
         QueryObjectMapper qryObjectMapper;
-        public AccountRepository(QueryObjectMapper qryObject)
+        public CustomerRepository(QueryObjectMapper qryObject)
         {
             this.qryObjectMapper = qryObject;
         }
-        public Account FindAccountByUsername(string username)
+
+        public IList<Customer> GetCustomers()
         {
-            return qryObjectMapper.Map<Account>("findByUsername", new string[1] { "username" }, new object[1] { username }).FirstOrDefault();
+            return qryObjectMapper.Map<Customer>().ToList();
+        }
+
+        public void AddCustomer(Customer cust)
+        {
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using BonaStoco.Inf.Data.ViewModel;
 
-namespace Global.Repository
+namespace Global.Repository.models
 {
     [NamedSqlQuery("findByUsername", @"SELECT * FROM tbluser where username = @username")]
     public class Account : IViewModel

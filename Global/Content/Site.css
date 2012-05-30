@@ -221,14 +221,12 @@ table {
 
 table td {
     padding: 5px;
-    border: solid 1px #e8eef4;
 }
 
 table th {
     padding: 6px 5px;
     text-align: left;
     background-color: #e8eef4;
-    border: solid 1px #e8eef4;
 }
 
 /* MISC  

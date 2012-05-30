@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Spring.Context.Support;
 using Global.Repository;
+using Global.Repository.models;
 
 namespace Global.Security
 {

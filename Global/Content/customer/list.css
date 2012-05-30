@@ -1,4 +1,8 @@
-﻿#tblListCustomer
+﻿#tblListCustomerContainer
+{
+    border:0px;
+}
+#tblListCustomer
 {
 }
 #tblListCustomer thead tr th
