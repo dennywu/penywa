@@ -1,0 +1,25 @@
+﻿<h2>Tambah Barang</h2>
+@using (Html.BeginForm("AddItem","Item", FormMethod.Post)){
+    <table cellpadding="0" cellspacing="0" width="80%">
+        <tr>
+            <td>Nama</td>
+            <td><input type='text' name='Name' required/></td>
+        </tr>
+        <tr>
+            <td>Deskripsi</td>
+            <td><textarea name='Deskripsi'></textarea></td>
+        </tr>
+        <tr>
+            <td>Harga</td>
+            <td><input type='text' name='Harga' required/></td>
+        </tr>
+        <tr>
+            <td>Denda /Hari</td>
+            <td><input type='text' name='dendaperhari' required/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="submit">Tambah</button></td>
+        </tr>
+    </table>
+}

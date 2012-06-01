@@ -1,0 +1,63 @@
+﻿#tblHeaderPenyewaan
+{
+    width:40%;
+    border:0px;
+}
+#tblHeaderPenyewaan tr td
+{
+    vertical-align:top;
+}
+.right
+{
+    text-align:right;
+}
+.center
+{
+    text-align:center;
+}
+.left
+{
+    text-align:left;
+}
+input
+{
+    font-size:12px;
+}
+.red
+{
+    color:#9C0000;
+}
+.value
+{
+    color:#6E6E6E;
+}
+#searchCustResult
+{
+    width: 216px;
+    background-color: #f8f8f8;
+    position: absolute;
+    z-index: 100;
+    margin-top: -9px;
+}
+#searchCustResult .contain
+{
+    padding: 5px;
+    border-left: 1px solid #CCC;
+    border-right: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+    cursor:pointer;
+}
+#searchCustResult .contain:hover
+{
+    background-color:#ccc;
+}
+#searchCustResult .contain .custName
+{
+    font-weight:bold;
+    color:#000;
+}
+#searchCustResult .contain .custAlamat, #searchCustResult .contain .custEmail
+{
+    color:#333;
+    font-size:11px;
+}

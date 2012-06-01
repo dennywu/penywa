@@ -7,8 +7,11 @@ using BonaStoco.Inf.Data.ViewModel;
 namespace Global.Repository.models
 {
     [SqlQuery("SELECT * FROM tblcustomer")]
+    [NamedSqlQuery("GetCustomerById",@"SELECT * FROM tblcustomer where id = @id")]
+    [NamedSqlQuery("GetCustomerByName",@"SELECT * FROM tblcustomer where lower(name) like @key")]
     public class Customer : IViewModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Alamat { get; set; }
         public string Kota { get; set; }

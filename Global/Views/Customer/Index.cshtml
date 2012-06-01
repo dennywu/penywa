@@ -1,5 +1,6 @@
 ﻿@model IList<Global.Repository.models.Customer>
 <link href="@Url.Content("~/Content/customer/list.css")" type="text/css" rel="Stylesheet" />
+<h2>Pelanggan</h2>
 <table id='tblListCustomerContainer' cellspacing="0" cellpadding="0" width="100%">
     <tr>
         <td width="80%">
@@ -8,6 +9,7 @@
                     <tr>
                         <th>Nama</th>
                         <th>Sisa Tagihan</th>
+                        <th width='55px'></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -16,12 +18,13 @@
                         <tr>
                             <td>@cust.Name</td>
                             <td>@cust.Outstanding</td>
+                            <td>@Html.ActionLink("Ubah", "UpdateCustomer", new { custId = cust.Id })</td>
                         </tr>
                     } 
                 </tbody>
             </table>
         </td>
-        <td width="20%">
+        <td width="20%" valign="top">
             <div>
                 @Html.ActionLink("Tambah Pelanggan", "AddCustomer", "Customer")
             </div>

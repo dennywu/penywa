@@ -10,5 +10,8 @@ namespace Global.Repository
     {
         IList<Customer> GetCustomers();
         void AddCustomer(Customer cust);
+        void UpdateCustomer(Customer cust);
+        Customer GetCustomerById(int id);
+        IList<Customer> GetCustomerByName(string key);
     }
 }

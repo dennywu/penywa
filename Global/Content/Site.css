@@ -171,10 +171,13 @@ ul#menu li.selected a {
     background-color: #fff;
     color: #000;
 }
-
+input[type="text"], 
+input[type="password"] {
+    padding: 2px;
+}
 /* FORM LAYOUT ELEMENTS   
 ----------------------------------------------------------*/
-
+/*
 fieldset {
     border: 1px solid #ddd;
     padding: 0 1.4em 1.4em 1.4em;

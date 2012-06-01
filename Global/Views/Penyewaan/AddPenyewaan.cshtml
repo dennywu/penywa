@@ -1,0 +1,61 @@
+﻿<link href="@Url.Content("~/Content/penyewaan/add.css")" type="text/css" rel="Stylesheet" />
+<script src="@Url.Content("~/Scripts/penyewaan/addItem.js")" type="text/javascript"></script>
+<h2>Tambah Penyewaan</h2>
+<table cellpadding="0" cellspacing="0" width="80%">
+    <tr>
+        <td>
+            <table cellpadding="0" cellspacing="0" id='tblHeaderPenyewaan'>
+                <tr>
+                    <td class="red">Pilih Pelanggan</td>
+                    <td>
+                        <input type="text" name="Name" id='inputCustomer' required placeholder='Ketik Nama Pelanggan' autocomplete="off"/>
+                        <div id='searchCustResult'></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>No Penyewaan#</td>
+                    <td class='value'>Otomatis Tercetak</td>
+                </tr>
+                <tr>
+                    <td>Tanggal Penyewaan</td>
+                    <td><input type="text" name="Name" required placeholder="Pilih Tanggal Penyewaan"/></td>
+                </tr>
+                <tr>
+                    <td>Tanggal Pengembalian</td>
+                    <td><input type="text" name="Name" required placeholder="Pilih Tanggal Pengembalian"/></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Barang</th>
+                        <th>Deskripsi</th>
+                        <th width="10%" class='center'>Qty</th>
+                        <th width="20%" class='right'>Harga</th>
+                        <th width="20%" class='right'>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">Tambah Baris</td>
+                        <td class='right'>Sub Total</td>
+                        <td class='right'>Rp. 10000000</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </td>
+    </tr>
+</table>

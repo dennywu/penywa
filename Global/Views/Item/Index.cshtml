@@ -1,0 +1,35 @@
+﻿<h2>Barang</h2>
+@model IList<Global.Repository.models.Item>
+<link href="@Url.Content("~/Content/item/list.css")" type="text/css" rel="Stylesheet" />
+<table id='tblListCustomerContainer' cellspacing="0" cellpadding="0" width="100%">
+    <tr>
+        <td width="80%">
+            <table id="tblListCustomer" cellpadding="0" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Status</th>
+                        <th>Harga</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Global.Repository.models.Item item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name<br />@item.Deskripsi</td>
+                            <td>@item.Status</td>
+                            <td>@item.Harga.ToString("N")</td>
+                            <td>@Html.ActionLink("Update", "UpdateItem", new { id = item.ItemId })</td>
+                        </tr>
+                    } 
+                </tbody>
+            </table>
+        </td>
+        <td width="20%" valign="top">
+            <div>
+                @Html.ActionLink("Tambah Barang", "AddItem", "Item")
+            </div>
+        </td>
+    </tr>
+</table>

@@ -22,10 +22,16 @@ namespace Global.Controllers
         {
             if (ModelState.IsValid)
             {
-                IAuthService auth = new AuthService();
-                int userId = auth.Login(model.UserName, model.Password);
-                if (userId == null)
-                    ModelState.AddModelError("", "Username atau Password anda salah.");
+                try
+                {
+                    IAuthService auth = new AuthService();
+                    int userId = auth.Login(model.UserName, model.Password);
+                }
+                catch (ApplicationException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(model);
+                }
 
                 FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                 if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")

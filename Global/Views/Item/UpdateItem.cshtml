@@ -1,0 +1,39 @@
+﻿<h2>Ubah Barang</h2>
+@model Global.Repository.models.Item
+@using (Html.BeginForm("UpdateItem","Item", FormMethod.Post)){
+    <table cellpadding="0" cellspacing="0" width="80%">
+        <tr>
+            <td>Nama</td>
+            <td><input type='text' name='Name' required value='@Model.Name'/><input type='hidden' name='ItemId' required value='@Model.ItemId'/></td>
+        </tr>
+        <tr>
+            <td>Deskripsi</td>
+            <td><textarea name='Deskripsi'>@Model.Deskripsi</textarea></td>
+        </tr>
+        <tr>
+            <td>Harga</td>
+            <td><input type='text' name='Harga' required value='@Model.Harga'/></td>
+        </tr>
+        <tr>
+            <td>Denda /Hari</td>
+            <td><input type='text' name='dendaperhari' required value='@Model.DendaPerHari'/></td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>@Model.Status
+                @if (Model.Status == "Aktif")
+                {
+                    @Html.ActionLink("Non Aktifkan", "ChangeStatusItem", new {status = "NONAKTIF", itemId = Model.ItemId});   
+                }
+                else if (Model.Status == "Non Aktif")
+                {
+                    @Html.ActionLink("Aktifkan", "ChangeStatusItem", new { status = "AKTIF", itemId = Model.ItemId });
+                }
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="submit">Ubah</button></td>
+        </tr>
+    </table>
+}

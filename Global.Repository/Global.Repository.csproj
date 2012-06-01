@@ -73,7 +73,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="interface\IItemRepository.cs" />
     <Compile Include="interface\ICustomerRepository.cs" />
+    <Compile Include="repositories\ItemRepository.cs" />
+    <Compile Include="models\Item.cs" />
     <Compile Include="repositories\CustomerRepository.cs" />
     <Compile Include="models\Account.cs" />
     <Compile Include="models\Customer.cs" />

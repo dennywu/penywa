@@ -22,7 +22,11 @@ namespace Global.Controllers
         {
             return View();
         }
-
+        public ActionResult UpdateCustomer(int custId)
+        {
+            Customer cust = CustomerRepository.GetCustomerById(custId);
+            return View(cust);
+        }
         [HttpPost]
         public ActionResult AddCustomer(string name, string alamat, string kota, string negara, string kodepos, string email)
         {
@@ -43,10 +47,30 @@ namespace Global.Controllers
             }
             catch (ApplicationException ex)
             {
-                return View(ex);
+                return View(ex.Message);
             }
         }
 
+        [HttpPost]
+        public ActionResult UpdateCustomer(Customer cust)
+        {
+            try
+            {
+                CustomerRepository.UpdateCustomer(cust);
+                return RedirectToAction("Index", "Customer");
+            }
+            catch (ApplicationException ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public JsonResult SearchCustomerByName(string key)
+        {
+            IList<Customer> cust = CustomerRepository.GetCustomerByName(key);
+            return Json(cust, JsonRequestBehavior.AllowGet);
+        }
         private ICustomerRepository CustomerRepository
         {
             get
