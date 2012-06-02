@@ -61,3 +61,7 @@ input
     color:#333;
     font-size:11px;
 }
+#statusSelectCust{
+    float: right;
+    margin-right: -15px;
+}
