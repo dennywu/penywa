@@ -13,5 +13,6 @@ namespace Global.Repository
         Item GetItemById(long id);
         void UpdateItem(Item item);
         void ChangeStatus(string status, long itemId);
+        IList<Item> GetItemByName(string key);
     }
 }

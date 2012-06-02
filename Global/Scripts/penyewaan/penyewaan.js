@@ -1,18 +1,10 @@
 ﻿var RENTAL = {};
-RENTAL.SELECTCUSTOMER = {};
-RENTAL.SELECTCUSTOMER.sessionTimeOutSearchingCust;
 
 $(document).ready(function () {
     var selectCust = RENTAL.SELECTCUSTOMER;
-    $("#inputCustomer").keyup(selectCust.searchCustomer);
-    $("#inputCustomer").focus(selectCust.showSearchedResult);
-    $("#inputCustomer").blur(function () {
-        setTimeout(selectCust.hideSearchedResult, 200);
-    });
+    RENTAL.SELECTCUSTOMER.setupSelectCustomer();
     RENTAL.setupDatePicker();
-    $("#addRow").click(RENTAL.ITEM.addRow);
-    $("#tblitem tbody tr").hover(RENTAL.ITEM.showRemoveButton);
-    $("#tblitem tbody tr").mouseleave(RENTAL.ITEM.hideRemoveButton);
+    RENTAL.ITEM.setupItem();
 });
 
 RENTAL.setupDatePicker = function () {

@@ -162,6 +162,7 @@
     <Content Include="Content\jquery-ui\images\ui-icons_ed9f26_256x240.png" />
     <Content Include="Content\jquery-ui\images\ui-icons_fadc7a_256x240.png" />
     <Content Include="Content\jquery-ui\images\ui-icons_ffe180_256x240.png" />
+    <Content Include="Scripts\CurrencyRounding.js" />
     <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.5.1.js" />
     <Content Include="Scripts\jquery-1.5.1.min.js" />

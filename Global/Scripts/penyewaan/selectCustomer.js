@@ -1,4 +1,13 @@
-﻿RENTAL.SELECTCUSTOMER.setStatusSelectCust = function () {
+﻿RENTAL.SELECTCUSTOMER = {};
+RENTAL.SELECTCUSTOMER.sessionTimeOutSearchingCust;
+RENTAL.SELECTCUSTOMER.setupSelectCustomer = function () {
+    $("#inputCustomer").keyup(RENTAL.SELECTCUSTOMER.searchCustomer);
+    $("#inputCustomer").focus(RENTAL.SELECTCUSTOMER.showSearchedResult);
+    $("#inputCustomer").blur(function () {
+        setTimeout(RENTAL.SELECTCUSTOMER.hideSearchedResult, 200);
+    });
+}
+RENTAL.SELECTCUSTOMER.setStatusSelectCust = function () {
     var id = $("#custId").val();
     if (id != "")
         $("#statusSelectCust").text('T').css("color","Green");
@@ -35,7 +44,6 @@ RENTAL.SELECTCUSTOMER.searchCustomer = function (ev) {
 }
 RENTAL.SELECTCUSTOMER.searchingCustomer = function () 
 {
-    
     var key = $("#inputCustomer").val();
     if (key == "")
         return RENTAL.SELECTCUSTOMER.clearSearchedResult();
@@ -57,7 +65,6 @@ RENTAL.SELECTCUSTOMER.searchingCustomerCallBack = function (data) {
         }
     }
     $("#searchCustResult .contain").click(RENTAL.SELECTCUSTOMER.CustomerChosen);
-    
 }
 RENTAL.SELECTCUSTOMER.createSearchedCustRow = function(cust) {
     var divContain = $("<div>", { 'class': 'contain', 'id': cust.Id, 'name': cust.Name });

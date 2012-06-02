@@ -40,6 +40,12 @@ namespace Global.Controllers
             }
         }
 
+        public JsonResult GetItemById(long id)
+        {
+            Item item = ItemRepository.GetItemById(id);
+            return Json(item, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult UpdateItem(long id)
         {
             Item item = ItemRepository.GetItemById(id);
@@ -76,6 +82,13 @@ namespace Global.Controllers
             {
                 return View(ex.Message);
             }
+        }
+
+        [HttpGet]
+        public JsonResult SearchItemByName(string key)
+        {
+            IList<Item> item = ItemRepository.GetItemByName(key);
+            return Json(item, JsonRequestBehavior.AllowGet);
         }
 
         private IItemRepository ItemRepository
