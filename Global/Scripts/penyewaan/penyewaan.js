@@ -1,10 +1,10 @@
 ﻿var RENTAL = {};
-
 $(document).ready(function () {
     var selectCust = RENTAL.SELECTCUSTOMER;
     RENTAL.SELECTCUSTOMER.setupSelectCustomer();
     RENTAL.setupDatePicker();
     RENTAL.ITEM.setupItem();
+    $("#btnSave").click(RENTAL.save);
 });
 
 RENTAL.setupDatePicker = function () {
@@ -21,6 +21,37 @@ RENTAL.setupDatePicker = function () {
 						$.datepicker._defaults.dateFormat,
 						selectedDate, instance.settings);
             dates.not(this).datepicker("option", option, date);
+        }
+    });
+}
+
+RENTAL.save = function () {
+    var data = {};
+    data.CustomerId = $("#custId").val();
+    data.TransactionDate = $("#fromdate").val();
+    data.DueDate = $("#todate").val();
+    data.Items = [];
+    $("#tblitem tbody tr").each(function (i) {
+        if ($('.inputPartName').length != 0) {
+            if ($('.inputPartName').get(i).value != "" && $('.itemtotalValue').get(i).value != "") {
+                data.Items[i] = {};
+                data.Items[i].ItemId = $('.itemId').get(i).value;
+                data.Items[i].Deskripsi = $('.deskripsi').get(i).value;
+                data.Items[i].Qty = $('.itemqty').get(i).value;
+                data.Items[i].Harga = $('.itemharga').get(i).value;
+                data.Items[i].Total = $('.total').get(i).value;
+            }
+        }
+    });
+
+    console.log(data);
+    $.ajax({
+        type: 'POST',
+        url: '/Penyewaan/AddPenyewaan',
+        data: { 'rental': JSON.stringify(data) },
+        dataType: 'json',
+        success: function (data) {
+            alert(data);
         }
     });
 }

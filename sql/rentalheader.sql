@@ -1,14 +1,17 @@
+-- Table: tblrentalheader
+
+-- DROP TABLE tblrentalheader;
+
 CREATE TABLE tblrentalheader
 (
-  rentalid character varying(1000) NOT NULL,
-  rentralno character varying(250),
-  transactiondate date,
-  duedate date,
+  rentalid uuid,
   custid integer,
-  CONSTRAINT pk_rentalheader PRIMARY KEY (rentalid )
+  rentalno character varying(250),
+  transactiondate date,
+  duedate date
 )
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE rentalheader
-  OWNER TO postgres;
+ALTER TABLE tblrentalheader
+  OWNER TO dny;

@@ -104,10 +104,10 @@ RENTAL.ITEM.removeRowItem = function () {
 RENTAL.ITEM.addRow = function () {
     RENTAL.ITEM.totalRow++;
     $("#tblitem tbody").append("<tr id='" + RENTAL.ITEM.totalRow + "'><td>" +
-                        "<input type='hidden' id='itemId_" + RENTAL.ITEM.totalRow + "' />" +
+                        "<input type='hidden' class='itemId' id='itemId_" + RENTAL.ITEM.totalRow + "' />" +
                         "<input type='text' name='itemname' class='inputPartName inputPartName_" + RENTAL.ITEM.totalRow + "' id='" + RENTAL.ITEM.totalRow + "' placeholder='Ketik Nama Barang'/>" +
                         "<div class='itemSearchResult' id='searchItemResult_" + RENTAL.ITEM.totalRow + "'></div></td>" +
-                        "<td><textarea id='inputDeskripsi_" + RENTAL.ITEM.totalRow + "'></textarea></td>" +
+                        "<td><textarea class='deskripsi' id='inputDeskripsi_" + RENTAL.ITEM.totalRow + "'></textarea></td>" +
                         "<td><input type='number' name='qty' class='itemqty' itemid='" + RENTAL.ITEM.totalRow + "' id='inputQty_" + RENTAL.ITEM.totalRow + "' min='1'/></td>" +
                         "<td><input type='text' name='harga' class='itemharga' itemid='" + RENTAL.ITEM.totalRow + "' id='inputHarga_" + RENTAL.ITEM.totalRow + "'/></td>" +
                         "<td><div><div class='itemtotalCcy' id='itemtotalCcy_" + RENTAL.ITEM.totalRow + "'>Rp</div>" +
