@@ -1,10 +1,10 @@
 ﻿var RENTAL = {};
-
 $(document).ready(function () {
     var selectCust = RENTAL.SELECTCUSTOMER;
     RENTAL.SELECTCUSTOMER.setupSelectCustomer();
     RENTAL.setupDatePicker();
     RENTAL.ITEM.setupItem();
+    $("#btnSave").click(RENTAL.save);
 });
 
 RENTAL.setupDatePicker = function () {
@@ -23,4 +23,15 @@ RENTAL.setupDatePicker = function () {
             dates.not(this).datepicker("option", option, date);
         }
     });
+}
+
+RENTAL.save = function () {
+    var data = {};
+    data.CustomerId = $("#custId").val();
+    data.TransactionDate = $("#fromdate").val();
+    data.dueDate = $("#todate").val();
+    data.Items = [];
+
+
+    console.log(data);
 }

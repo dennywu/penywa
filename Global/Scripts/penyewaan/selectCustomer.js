@@ -19,7 +19,7 @@ RENTAL.SELECTCUSTOMER.CustomerChosen = function () {
     var custId = $(this).attr("id");
     var custName = $(this).attr("name");
     $("#inputCustomer").val(custName);
-    $("#custId").val(custId);    
+    $("#custId").val(custId);
 }
 
 RENTAL.SELECTCUSTOMER.searchCustomer = function (ev) {
