@@ -1,0 +1,44 @@
+﻿div.RentalHeaderDiv
+{
+    float:left;
+    padding:20px 0 10px 10px;
+}
+table.noborder, table.noborder tr, table.noborder td
+{
+    border:0;
+    border-spacing:0;
+}
+table#RentalItemTbl
+{
+    border:0;
+    border-spacing:0;
+}
+table#RentalItemTbl tbody td
+{
+    border-bottom:1px solid #E8EEF4
+}
+.rightAlign
+{
+    text-align:right;
+}
+div#RentalItemDiv
+{
+    padding:10px 10px 10px 10px;
+    margin-bottom:20px;
+}
+.summaryField
+{
+    text-align:right;
+    font-weight:bold;
+    border-bottom:1px solid #E8EEF4
+}
+.headerTittle
+{
+    font-weight:bold;
+    background-color:#E8EEF4;
+}
+.headerContent
+{
+    width:50%;
+}
+}

@@ -121,6 +121,7 @@
     <Content Include="Content\item\list.css" />
     <Content Include="Content\penyewaan\add.css" />
     <Content Include="Content\penyewaan\addItem.css" />
+    <Content Include="Content\penyewaan\detail.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -228,6 +229,10 @@
       <Project>{565A981A-743E-4D93-A3BE-FB3D4FD084A1}</Project>
       <Name>Global.Penyewaan.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Global.ReportingRepository\Global.ReportingRepository.csproj">
+      <Project>{F3B1B0A1-18F0-4880-B071-3EC9755DF5FB}</Project>
+      <Name>Global.ReportingRepository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Global.Repository\Global.Repository.csproj">
       <Project>{6F9C86D7-D421-46C8-8870-19754BA09AF3}</Project>
       <Name>Global.Repository</Name>
@@ -260,6 +265,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Penyewaan\AddPenyewaan.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Penyewaan\DetailPenyewaan.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -8,12 +8,17 @@ using Newtonsoft.Json;
 using Global.Penyewaan.Domain;
 using Spring.Context.Support;
 using Global.Outstanding;
+using Global.ReportingRepository;
+using Spring.Context.Support;
+using Global.Repository;
 
 namespace Global.Controllers
 {
     public class PenyewaanController : Controller
     {
         private PenyewaanDomain _domain;
+        IRentalReportingRepository rentalreportingRepo;
+        ICustomerRepository custRepo;
         private RentalOutstandingHandler _outstanding;
         [Authorize]
         public ActionResult Index()
@@ -27,7 +32,7 @@ namespace Global.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddPenyewaan(string rental)
+        public JsonResult AddPenyewaan(string rental)
         {
             Rental rent = JsonConvert.DeserializeObject<Rental>(rental);
             Guid rentalId = Guid.NewGuid();
@@ -37,7 +42,7 @@ namespace Global.Controllers
             CreateRentalItem(rent);
             decimal subtotal = CreateRentalSummary(rent);
             Outstanding.OustandingRentalListView(rent.RentalId, subtotal);
-            return RedirectToAction("Index", "Penyewaan");
+            return Json(new { redirectTo = Url.Action("DetailPenyewaan", "Penyewaan", new { rentalId = rentalId.ToString() }) }, JsonRequestBehavior.AllowGet);
         }
 
         private decimal CreateRentalSummary(Rental rent)
@@ -103,6 +108,34 @@ namespace Global.Controllers
                 if (_outstanding == null)
                     _outstanding = (RentalOutstandingHandler)ContextRegistry.GetContext().GetObject("Outstanding");
                 return _outstanding;
+            }
+        }
+        public ActionResult DetailPenyewaan(string rentalId)
+        {
+            Guid _rentalId = new Guid(rentalId);
+            Global.ReportingRepository.model.RentalHeader rentalHeader = RentalReportingRepository.GetRentalHeaderById(_rentalId);
+            ViewBag.CustomerName = CustomerRepository.GetCustomerById(rentalHeader.CustId).Name;
+            ViewBag.RentalItems = RentalReportingRepository.GetRentalItemByRentalId(_rentalId);
+            ViewBag.Summary = RentalReportingRepository.GetRentalSummaryByRentalId(_rentalId);
+            return View(rentalHeader);
+        }
+
+        private IRentalReportingRepository RentalReportingRepository
+        {
+            get
+            {
+                if (rentalreportingRepo == null)
+                    rentalreportingRepo = (IRentalReportingRepository)ContextRegistry.GetContext().GetObject("RentalReportingRepository");
+                return rentalreportingRepo;
+            }
+        }
+        private ICustomerRepository CustomerRepository
+        {
+            get
+            {
+                if (custRepo == null)
+                    custRepo = (ICustomerRepository)ContextRegistry.GetContext().GetObject("CustomerRepository");
+                return custRepo;
             }
         }
     }
