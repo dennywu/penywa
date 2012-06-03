@@ -9,7 +9,6 @@ using Global.Penyewaan.Domain;
 using Spring.Context.Support;
 using Global.ReportingRepository;
 using Spring.Context.Support;
-using Global.ReportingRepository.model;
 using Global.Repository;
 
 namespace Global.Controllers
@@ -31,7 +30,7 @@ namespace Global.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddPenyewaan(string rental)
+        public JsonResult AddPenyewaan(string rental)
         {
             Rental rent = JsonConvert.DeserializeObject<Rental>(rental);
             Guid rentalId = Guid.NewGuid();
@@ -40,7 +39,7 @@ namespace Global.Controllers
             CreateRentalHeader(rent);
             CreateRentalItem(rent);
             CreateRentalSummary(rent);
-            return RedirectToAction("Index", "Penyewaan");
+            return Json(new { redirectTo = Url.Action("DetailPenyewaan", "Penyewaan", new { rentalId = rentalId.ToString() }) }, JsonRequestBehavior.AllowGet);
         }
 
         private void CreateRentalSummary(Rental rent)
@@ -101,7 +100,7 @@ namespace Global.Controllers
         public ActionResult DetailPenyewaan(string rentalId)
         {
             Guid _rentalId = new Guid(rentalId);
-            RentalHeader rentalHeader = RentalReportingRepository.GetRentalHeaderById(_rentalId);
+            Global.ReportingRepository.model.RentalHeader rentalHeader = RentalReportingRepository.GetRentalHeaderById(_rentalId);
             ViewBag.CustomerName = CustomerRepository.GetCustomerById(rentalHeader.CustId).Name;
             ViewBag.RentalItems = RentalReportingRepository.GetRentalItemByRentalId(_rentalId);
             ViewBag.Summary = RentalReportingRepository.GetRentalSummaryByRentalId(_rentalId);

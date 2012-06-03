@@ -51,7 +51,8 @@ RENTAL.save = function () {
         data: { 'rental': JSON.stringify(data) },
         dataType: 'json',
         success: function (data) {
-            alert(data);
+            //            alert(data);
+            window.location = data.redirectTo;
         }
     });
 }

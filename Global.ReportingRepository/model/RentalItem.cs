@@ -6,16 +6,16 @@ using BonaStoco.Inf.Data.ViewModel;
 
 namespace Global.ReportingRepository.model
 {
-    [NamedSqlQuery("FindRentalItemByRentalId","select * from tblrentalitem where rentalid=@rentalId")]
-    [NamedSqlQuery("FindRentalItemById", "select * from tblrentalitem where itemid=@itemidId")]
+    [NamedSqlQuery("FindRentalItemByRentalId","select ri.*,i.name as partname from tblrentalitem ri inner join tblitem i on ri.itemid=i.itemid where ri.rentalid=@rentalId")]
     public class RentalItem:IViewModel
     {
-        public Guid ItemId { get; set; }
+        public long Id { get; set; }
         public Guid RentalId { get; set; }
-        public string PartName { get; set; }
+        public int ItemId { get; set; }
         public string Description { get; set; }
         public int Qty { get; set; }
         public decimal Harga { get; set; }
         public decimal Total { get; set; }
+        public string PartName { get; set; }
     }
 }
