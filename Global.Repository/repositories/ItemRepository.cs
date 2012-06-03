@@ -40,5 +40,10 @@ namespace Global.Repository
                 status, itemId);
             qryObjectMapper.Map<Item>(query);
         }
+        public IList<Item> GetItemByName(string key)
+        {
+            key = "%" + key.ToLower() + "%";
+            return qryObjectMapper.Map<Item>("GetItemByName", new string[1] { "key" }, new object[1] { key }).OrderBy(c => c.Name).ToList();
+        }
     }
 }

@@ -1,0 +1,92 @@
+﻿#addRow
+{
+    color:Green;
+    cursor:pointer;
+}
+#addRow:hover
+{
+    color:#666;
+}
+.itemRemove
+{
+    font-weight:bold;
+    color:Red;
+    cursor:pointer;
+    display:none;
+    text-align:center;
+    margin-right:-10px;
+}
+.itemRemove:hover
+{
+    color:#666;
+}
+.itemqty
+{
+    width:50px;
+}
+.itemharga
+{
+    width:120px;
+}
+.itemtotalCcy
+{
+    width: 30px;
+    float: left;
+    text-align: right;
+    display:none;
+}
+.itemtotalValue
+{
+    width: 120px;
+    float: right;
+    text-align:right;
+}
+.itemSearchResult
+{
+    width: 216px;
+    background-color: #f7f2c7;
+    position: absolute;
+    z-index: 100;
+    margin-top: -9px;
+}
+
+.itemSearchResult .contain
+{
+    padding: 5px;
+    border-left: 1px solid #CCC;
+    border-right: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+    cursor:pointer;
+}
+.itemSearchResult .contain:hover
+{
+    background-color:#dfdaad;
+}
+.itemSearchResult .contain .itemName
+{
+    font-weight:bold;
+    color:#000;
+}
+.itemSearchResult .contain .itemDeskripsi
+{
+    color:#333;
+    font-size:11px;
+}
+.summary
+{
+    display:none;
+    font-weight:bold;
+}
+.summaryCcy
+{
+    width: 30px;
+    float: left;
+    text-align: right;
+    display:none;
+}
+.summaryValue
+{
+    width: 120px;
+    float: right;
+    text-align:right;
+}
