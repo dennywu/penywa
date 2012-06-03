@@ -6,16 +6,18 @@ using BonaStoco.Inf.Data.ViewModel;
 
 namespace Global.Repository.models
 {
-    [NamedSqlQuery("GetRentalListView",@"SELECT 
+    [NamedSqlQuery("GetRentalListView", @"SELECT 
                     h.rentalid,
                     h.rentalno,
                     c.name as CustomerName,
                     h.transactiondate,
                     h.duedate,
-                    s.total 
+                    s.total,
+                    o.outstanding 
                     FROM tblrentalheader h inner join 
                     tblcustomer c on h.custid = c.id inner join 
-                    tblrentalsummary s on h.rentalid = s.rentalid")]
+                    tblrentalsummary s on h.rentalid = s.rentalid inner join
+                    tblrentaloutstanding o on h.rentalid = o.rentalid")]
     public class RentalListViewReport : IViewModel
     {
         public Guid RentalId { get; set; }

@@ -220,6 +220,10 @@
     <Content Include="Views\Shared\_Layout_Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Global.Outstanding\Global.Outstanding.csproj">
+      <Project>{D90A5440-D704-44A6-A5F4-C24D6984A5BD}</Project>
+      <Name>Global.Outstanding</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Global.Penyewaan.Domain\Global.Penyewaan.Domain.csproj">
       <Project>{565A981A-743E-4D93-A3BE-FB3D4FD084A1}</Project>
       <Name>Global.Penyewaan.Domain</Name>

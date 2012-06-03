@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6F9C86D7-D421-46C8-8870-19754BA09AF3}</ProjectGuid>
+    <ProjectGuid>{D90A5440-D704-44A6-A5F4-C24D6984A5BD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Global.Repository</RootNamespace>
-    <AssemblyName>Global.Repository</AssemblyName>
+    <RootNamespace>Global.Outstanding</RootNamespace>
+    <AssemblyName>Global.Outstanding</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -52,6 +52,9 @@
     <Reference Include="Common.Logging">
       <HintPath>..\packages\spring-amqp\Common.Logging.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Security">
+      <HintPath>..\packages\Mono.Security.dll</HintPath>
+    </Reference>
     <Reference Include="Npgsql">
       <HintPath>..\packages\Npgsql.dll</HintPath>
     </Reference>
@@ -73,18 +76,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="interface\IItemRepository.cs" />
-    <Compile Include="interface\ICustomerRepository.cs" />
-    <Compile Include="models\Rental.cs" />
-    <Compile Include="models\RentalListViewReport.cs" />
-    <Compile Include="repositories\ItemRepository.cs" />
-    <Compile Include="models\Item.cs" />
-    <Compile Include="repositories\CustomerRepository.cs" />
-    <Compile Include="models\Account.cs" />
-    <Compile Include="models\Customer.cs" />
+    <Compile Include="models\RentalOutstanding.cs" />
+    <Compile Include="RentalOutstandingHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="repositories\AccountRepository.cs" />
-    <Compile Include="interface\IAccountRepository.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,12 +7,14 @@ using Global.Repository.models;
 using Newtonsoft.Json;
 using Global.Penyewaan.Domain;
 using Spring.Context.Support;
+using Global.Outstanding;
 
 namespace Global.Controllers
 {
     public class PenyewaanController : Controller
     {
         private PenyewaanDomain _domain;
+        private RentalOutstandingHandler _outstanding;
         [Authorize]
         public ActionResult Index()
         {
@@ -33,11 +35,12 @@ namespace Global.Controllers
             rent.RentalNo = "RENT-001";
             CreateRentalHeader(rent);
             CreateRentalItem(rent);
-            CreateRentalSummary(rent);
+            decimal subtotal = CreateRentalSummary(rent);
+            Outstanding.OustandingRentalListView(rent.RentalId, subtotal);
             return RedirectToAction("Index", "Penyewaan");
         }
 
-        private void CreateRentalSummary(Rental rent)
+        private decimal CreateRentalSummary(Rental rent)
         {
             decimal subtotal = 0;
             foreach (RentalItem itm in rent.Items)
@@ -50,6 +53,7 @@ namespace Global.Controllers
                 Total = subtotal
             };
             Penyewaan.CreateRentalSummary(summary);
+            return subtotal;
         }
 
         private void CreateRentalItem(Rental rent)
@@ -90,6 +94,15 @@ namespace Global.Controllers
                 if(_domain == null)
                     _domain = (PenyewaanDomain)ContextRegistry.GetContext().GetObject("PenyewaanDomain");
                 return _domain;
+            }
+        }
+        private RentalOutstandingHandler Outstanding
+        {
+            get
+            {
+                if (_outstanding == null)
+                    _outstanding = (RentalOutstandingHandler)ContextRegistry.GetContext().GetObject("Outstanding");
+                return _outstanding;
             }
         }
     }
