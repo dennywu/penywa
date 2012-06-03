@@ -76,6 +76,7 @@
     <Compile Include="interface\IItemRepository.cs" />
     <Compile Include="interface\ICustomerRepository.cs" />
     <Compile Include="models\Rental.cs" />
+    <Compile Include="models\RentalListViewReport.cs" />
     <Compile Include="repositories\ItemRepository.cs" />
     <Compile Include="models\Item.cs" />
     <Compile Include="repositories\CustomerRepository.cs" />
