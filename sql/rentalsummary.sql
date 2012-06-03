@@ -1,10 +1,14 @@
+-- Table: tblrentalsummary
+
+-- DROP TABLE tblrentalsummary;
+
 CREATE TABLE tblrentalsummary
 (
-  rentalid character varying(1000),
+  rentalid uuid,
   total numeric
 )
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE rentalsummary
-  OWNER TO postgres;
+ALTER TABLE tblrentalsummary
+  OWNER TO dny;

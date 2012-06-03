@@ -61,6 +61,9 @@
     <Reference Include="Mono.Security">
       <HintPath>..\packages\Mono.Security.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Npgsql">
       <HintPath>..\packages\Npgsql.dll</HintPath>
     </Reference>
@@ -217,6 +220,10 @@
     <Content Include="Views\Shared\_Layout_Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Global.Penyewaan.Domain\Global.Penyewaan.Domain.csproj">
+      <Project>{565A981A-743E-4D93-A3BE-FB3D4FD084A1}</Project>
+      <Name>Global.Penyewaan.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Global.Repository\Global.Repository.csproj">
       <Project>{6F9C86D7-D421-46C8-8870-19754BA09AF3}</Project>
       <Name>Global.Repository</Name>
