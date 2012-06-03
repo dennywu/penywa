@@ -1,4 +1,4 @@
-CREATE TABLE rentalitem
+CREATE TABLE tblrentalitem
 (
   itemid character varying(1000) NOT NULL,
   rentalid character varying(1000),

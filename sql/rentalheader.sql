@@ -1,10 +1,10 @@
-CREATE TABLE rentalheader
+CREATE TABLE tblrentalheader
 (
   rentalid character varying(1000) NOT NULL,
   rentralno character varying(250),
   transactiondate date,
   duedate date,
-  custid character varying(1000),
+  custid integer,
   CONSTRAINT pk_rentalheader PRIMARY KEY (rentalid )
 )
 WITH (
