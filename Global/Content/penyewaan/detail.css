@@ -15,7 +15,11 @@ table#RentalItemTbl
 }
 table#RentalItemTbl tbody td
 {
-    border-bottom:1px solid #E8EEF4
+    border-bottom:1px solid #D8D8D8
+}
+table#RentalHeaderTbl, table#RentalHeaderTbl tr, table#RentalHeaderTbl td
+{
+    border:1px solid #D8D8D8
 }
 .rightAlign
 {
@@ -30,7 +34,7 @@ div#RentalItemDiv
 {
     text-align:right;
     font-weight:bold;
-    border-bottom:1px solid #E8EEF4
+    border-bottom:1px solid #D8D8D8
 }
 .headerTittle
 {
@@ -40,5 +44,5 @@ div#RentalItemDiv
 .headerContent
 {
     width:50%;
-}
+    background-color:#FAFAFA;
 }
