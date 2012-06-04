@@ -15,19 +15,17 @@ namespace Global.Outstanding
             this.qryObjectMapper = qryObjectMapper;
         }
 
-        public void OustandingRentalListView(Guid rentalId, decimal outstanding)
-        {
-            RentalOutstanding rentalOutstanding = qryObjectMapper.Map<RentalOutstanding>("GetOustanding", new string[1] { "id" }, new object[1] { rentalId }).FirstOrDefault();
-            if (rentalOutstanding == null)
-                InsertRentalOutstanding(rentalId, outstanding);
-            else
-                UpdateRentalOutstanding(rentalId, outstanding, rentalOutstanding);
-        }
-        private void InsertRentalOutstanding(Guid rentalId, decimal outstanding)
+        public void CreateNewOutstandingRental(Guid rentalId, decimal outstanding)
         {
             string query = String.Format("INSERT INTO tblrentaloutstanding (rentalid, outstanding) values ('{0}','{1}')",
                 rentalId, outstanding);
             qryObjectMapper.Map<RentalOutstanding>(query);
+        }
+
+        public void RemoveOutstanding(Guid rentalId, decimal outstanding)
+        {
+            RentalOutstanding rentalOutstanding = qryObjectMapper.Map<RentalOutstanding>("GetOustanding", new string[1] { "id" }, new object[1] { rentalId }).FirstOrDefault();
+            UpdateRentalOutstanding(rentalId, outstanding, rentalOutstanding);
         }
         private void UpdateRentalOutstanding(Guid rentalId, decimal outstanding, RentalOutstanding rentalOutstanding)
         {

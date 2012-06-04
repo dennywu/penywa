@@ -41,7 +41,7 @@ namespace Global.Controllers
             CreateRentalHeader(rent);
             CreateRentalItem(rent);
             decimal subtotal = CreateRentalSummary(rent);
-            Outstanding.OustandingRentalListView(rent.RentalId, subtotal);
+            Outstanding.CreateNewOutstandingRental(rent.RentalId, subtotal);
             return Json(new { redirectTo = Url.Action("DetailPenyewaan", "Penyewaan", new { rentalId = rentalId.ToString() }) }, JsonRequestBehavior.AllowGet);
         }
 
@@ -90,8 +90,6 @@ namespace Global.Controllers
             };
             Penyewaan.CreateRentalHeader(header);
         }
-
-
         private PenyewaanDomain Penyewaan
         {
             get

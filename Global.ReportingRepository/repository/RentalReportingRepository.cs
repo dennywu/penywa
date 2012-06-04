@@ -29,5 +29,10 @@ namespace Global.ReportingRepository
         {
             return qryObjectMapper.Map<RentalSummary>("FindSummaryByHeaderId", new string[1] { "Id" }, new object[1] { rentalId }).FirstOrDefault();
         }
+
+        public IList<RentalListViewReport> GetListView()
+        {
+            return qryObjectMapper.Map<RentalListViewReport>("GetRentalListView").ToList();
+        }
     }
 }
