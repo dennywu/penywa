@@ -11,5 +11,6 @@ namespace Global.ReportingRepository
         RentalHeader GetRentalHeaderById(Guid rentalId);
         IList<RentalItem> GetRentalItemByRentalId(Guid id);
         RentalSummary GetRentalSummaryByRentalId(Guid rentalId);
+        IList<RentalListViewReport> GetListView();
 	}
 }

@@ -32,7 +32,7 @@ namespace Global.ReportingRepository
 
         public IList<RentalListViewReport> GetListView()
         {
-            return qryObjectMapper.Map<RentalListViewReport>("GetRentalListView").ToList();
+            return qryObjectMapper.Map<RentalListViewReport>("GetRentalListView",new string[]{},new object[]{}).ToList();
         }
     }
 }
