@@ -23,8 +23,8 @@ namespace Global.ReportingRepository.model
         public Guid RentalId { get; set; }
         public string RentalNo { get; set; }
         public string CustomerName { get; set; }
-        public string TransactionDate { get; set; }
-        public string DueDate { get; set; }
+        public DateTime TransactionDate { get; set; }
+        public DateTime DueDate { get; set; }
         public decimal OutStanding { get; set; }
         public decimal Total { get; set; }
     }

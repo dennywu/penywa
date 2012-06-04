@@ -23,7 +23,8 @@ namespace Global.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View();
+            IList<Global.ReportingRepository.model.RentalListViewReport> rentalList = RentalReportingRepository.GetListView();
+            return View(rentalList);
         }
 
         public ActionResult AddPenyewaan()
@@ -117,7 +118,7 @@ namespace Global.Controllers
             ViewBag.Summary = RentalReportingRepository.GetRentalSummaryByRentalId(_rentalId);
             return View(rentalHeader);
         }
-
+        
         private IRentalReportingRepository RentalReportingRepository
         {
             get
