@@ -38,7 +38,7 @@ namespace Global.Controllers
             Rental rent = JsonConvert.DeserializeObject<Rental>(rental);
             Guid rentalId = Guid.NewGuid();
             rent.RentalId = rentalId;
-            rent.RentalNo = "RENT-001";
+            rent.RentalNo = Guid.NewGuid().ToString().GetHashCode().ToString("x");
             CreateRentalHeader(rent);
             CreateRentalItem(rent);
             decimal subtotal = CreateRentalSummary(rent);
