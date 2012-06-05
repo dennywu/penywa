@@ -20,8 +20,8 @@
                             <td>@Html.ActionLink(item.RentalNo, "DetailPenyewaan", new { rentalId = item.RentalId.ToString() })</td>
                             <td>@item.CustomerName</td>
                             <td>@item.TransactionDate</td>
-                            <td>@item.Total.ToString("N")</td>
-                            <td>@item.OutStanding.ToString("N")</td>
+                            <td>Rp @item.Total.ToString("N")</td>
+                            <td>Rp @item.OutStanding.ToString("N")</td>
                         </tr>
                     }
                 </tbody>
