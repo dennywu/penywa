@@ -9,8 +9,8 @@
                         <th>No Penyewaan</th>
                         <th>Nama Pelanggan</th>
                         <th>Tanggal</th>
-                        <th>Total</th>
-                        <th>Sisa Tagihan</th>
+                        <th style="text-align:right;">Total</th>
+                        <th style="text-align:right;">Sisa Tagihan</th>
                     </tr>
                 </thead>
                 <tbody> 
@@ -19,7 +19,7 @@
                         <tr>
                             <td>@Html.ActionLink(item.RentalNo, "DetailPenyewaan", new { rentalId = item.RentalId.ToString() })</td>
                             <td>@item.CustomerName</td>
-                            <td>@item.TransactionDate</td>
+                            <td>@item.TransactionDate.Date.ToString("dd MMM yyyy")</td>
                             <td>Rp @item.Total.ToString("N")</td>
                             <td>Rp @item.OutStanding.ToString("N")</td>
                         </tr>
