@@ -76,6 +76,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerOutstandingHandler.cs" />
+    <Compile Include="models\CustomerOutstanding.cs" />
     <Compile Include="models\RentalOutstanding.cs" />
     <Compile Include="RentalOutstandingHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

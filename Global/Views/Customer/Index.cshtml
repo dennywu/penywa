@@ -17,7 +17,7 @@
                     {
                         <tr>
                             <td>@cust.Name</td>
-                            <td>@cust.Outstanding</td>
+                            <td>Rp @cust.Outstanding.ToString("N")</td>
                             <td>@Html.ActionLink("Ubah", "UpdateCustomer", new { custId = cust.Id })</td>
                         </tr>
                     } 

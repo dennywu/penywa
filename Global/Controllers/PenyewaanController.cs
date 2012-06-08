@@ -20,6 +20,7 @@ namespace Global.Controllers
         IRentalReportingRepository rentalreportingRepo;
         ICustomerRepository custRepo;
         private RentalOutstandingHandler _outstanding;
+        private CustomerOutstandingHandler _custoutstanding;
         [Authorize]
         public ActionResult Index()
         {
@@ -38,11 +39,12 @@ namespace Global.Controllers
             Rental rent = JsonConvert.DeserializeObject<Rental>(rental);
             Guid rentalId = Guid.NewGuid();
             rent.RentalId = rentalId;
-            rent.RentalNo = "RENT-001";
+            rent.RentalNo = "RENTAL-" + Guid.NewGuid().ToString().GetHashCode().ToString("x");
             CreateRentalHeader(rent);
             CreateRentalItem(rent);
-            decimal subtotal = CreateRentalSummary(rent);
-            Outstanding.CreateNewOutstandingRental(rent.RentalId, subtotal);
+            decimal outstanding = CreateRentalSummary(rent);
+            Outstanding.CreateNewOutstandingRental(rent.RentalId, outstanding);
+            CustomerOutstanding.AddOutstanding(rent.CustomerId, outstanding);
             return Json(new { redirectTo = Url.Action("DetailPenyewaan", "Penyewaan", new { rentalId = rentalId.ToString() }) }, JsonRequestBehavior.AllowGet);
         }
 
@@ -107,6 +109,15 @@ namespace Global.Controllers
                 if (_outstanding == null)
                     _outstanding = (RentalOutstandingHandler)ContextRegistry.GetContext().GetObject("Outstanding");
                 return _outstanding;
+            }
+        }
+        private CustomerOutstandingHandler CustomerOutstanding
+        {
+            get
+            {
+                if (_custoutstanding == null)
+                    _custoutstanding = (CustomerOutstandingHandler)ContextRegistry.GetContext().GetObject("CustomerOutstanding");
+                return _custoutstanding;
             }
         }
         public ActionResult DetailPenyewaan(string rentalId)
