@@ -14,6 +14,7 @@ namespace Global.ReportingRepository.model
         public DateTime TransactionDate { get; set; }
         public DateTime DueDate { get; set; }
         public int CustId { get; set; }
+        public string Status { get; set; }
     }
 
     [NamedSqlQuery("FindSummaryByHeaderId", "select * from tblrentalsummary where rentalid=@Id")]

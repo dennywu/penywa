@@ -6,68 +6,98 @@
 <link href="@Url.Content("~/Content/penyewaan/detail.css")" type="text/css" rel="Stylesheet" />
 
 <h2>Detail Penyewaan</h2>
-<table width="80%">
-    <tr>
-        <td>
-            <div class="RentalHeaderDiv">
-                <table id="RentalHeaderTbl">
-                    <tr>
-                        <td class="headerTittle">No Penyewaan</td>
-                        <td class="headerContent">@Model.RentalNo</td>
-                    </tr>
-                    <tr>
-                        <td class="headerTittle">Penyewa</td>
-                        <td class="headerContent">@ViewBag.CustomerName</td>
-                    </tr>
-                    <tr>
-                        <td class="headerTittle">Tanggal Peminjaman</td>
-                        <td class="headerContent">@Model.TransactionDate.Date.ToString("dd MMM yyyy")</td>
-                    </tr>
-                    <tr>
-                        <th class="headerTittle">Tanggal Pengembalian</td>
-                        <td class="headerContent">@Model.DueDate.Date.ToString("dd MMM yyyy")</td>
-                    </tr>
-                </table>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div id="RentalItemDiv">
-                <table id="RentalItemTbl" width="100%">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Barang</th>
-                            <th>Deskripsi</th>
-                            <th class="rightAlign">Jumlah</th>
-                            <th class="rightAlign">Harga</th>
-                            <th class="rightAlign">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in ViewBag.RentalItems)
-                        {
+<table width="100%" style="border:0px solid #FFF;">
+    <tr valign="top">
+        <td width="80%">
+            <table width="100%">
+                <tr>
+                    <td>
+                        <div class="RentalHeaderDiv">
+                        <table id="RentalHeaderTbl">
                             <tr>
-                                <td>@no</td>
-                                <td>@item.PartName</td> 
-                                <td>@item.Description</td>
-                                <td class="rightAlign">@item.Qty</td>
-                                <td class="rightAlign">Rp @item.Harga.ToString("N")</td>
-                                <td class="rightAlign">Rp @item.Total.ToString("N")</td> 
+                                <td class="headerTittle">No Penyewaan</td>
+                                <td class="headerContent">@Model.RentalNo</td>
                             </tr>
-                            no = no + 1;
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="4"></td>
-                            <td class="summaryField">Total</td>
-                            <td class="summaryField">Rp @ViewBag.Summary.Total.ToString("N")</td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
+                            <tr>
+                                <td class="headerTittle">Penyewa</td>
+                                <td class="headerContent">@ViewBag.CustomerName</td>
+                            </tr>
+                            <tr>
+                                <td class="headerTittle">Tanggal Peminjaman</td>
+                                <td class="headerContent">@Model.TransactionDate.Date.ToString("dd MMMM yyyy")</td>
+                            </tr>
+                            <tr>
+                                <td class="headerTittle">Tanggal Pengembalian</td>
+                                <td class="headerContent">@Model.DueDate.Date.ToString("dd MMMM yyyy")</td>
+                            </tr>
+                            <tr>
+                                <td class="headerTittle">Status</td>
+                                <td class="headerContent"><b>@Model.Status</b></td>
+                            </tr>
+                        </table>
+                        </div>
+                    </td>
+                </tr>
+                                                                                                                                                                        <tr>
+                <td>
+                    <div id="RentalItemDiv">
+                        <table id="RentalItemTbl" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Barang</th>
+                                    <th>Deskripsi</th>
+                                    <th class="rightAlign">Jumlah</th>
+                                    <th class="rightAlign">Harga</th>
+                                    @if (@Model.Status == "Return"){<th class="rightAlign">Denda</th>}
+                                    <th class="rightAlign">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.RentalItems)
+                                {
+                                    <tr>
+                                        <td>@no</td>
+                                        <td>@item.PartName</td> 
+                                        <td>@item.Description</td>
+                                        <td class="rightAlign">@item.Qty</td>
+                                        <td class="rightAlign">Rp @item.Harga.ToString("N")</td>
+                                        @if (@Model.Status == "Return"){<td class="rightAlign">Rp @item.Total.ToString("N")</td> }
+                                        <td class="rightAlign">Rp @item.Total.ToString("N")</td> 
+                                    </tr>
+                                    no = no + 1;
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    @if (@Model.Status == "Return")
+                                    {
+                                        <td colspan="5"></td>
+                                    }
+                                    else
+                                    {
+                                        <td colspan="4"></td>
+                                    }
+                                    <td class="summaryField">Total</td>
+                                    <td class="summaryField">Rp @ViewBag.Summary.Total.ToString("N")</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            </table>
+        </td>
+        <td align="center">
+            <table width="80%" class='rightbutton' cellspacing="0" cellpadding="0">
+                <tr>
+                    @if (@Model.Status != "Return")
+                    {
+                        <td><div class='rightButton'>@Html.ActionLink("Kembali", "ReturnRental", new { rentalId = @Model.RentalId })</div></td>
+                    }
+                </tr>
+            </table>
         </td>
     </tr>
-</table>
+    
+</table>      

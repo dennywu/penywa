@@ -9,6 +9,7 @@ namespace Global.ReportingRepository.model
     [NamedSqlQuery("GetRentalListView", @"SELECT 
                     h.rentalid,
                     h.rentalno,
+                    h.status,
                     c.name as CustomerName,
                     h.transactiondate,
                     h.duedate,
@@ -27,5 +28,6 @@ namespace Global.ReportingRepository.model
         public DateTime DueDate { get; set; }
         public decimal OutStanding { get; set; }
         public decimal Total { get; set; }
+        public string Status { get; set; }
     }
 }

@@ -26,6 +26,7 @@ namespace Global.Repository.models
         public decimal Total { get; set; }
     }
 
+    [NamedSqlQuery("GetHeaderById",@"Select * FROM tblrentalheader where rentalid = @id")]
     public class RentalHeader : IViewModel
     {
         public Guid RentalId { get; set; }
@@ -33,6 +34,7 @@ namespace Global.Repository.models
         public int CustomerId { get; set; }
         public DateTime TransactionDate { get; set; }
         public DateTime DueDate { get; set; }
+        public string Status { get; set; }
     }
 
     public class RentalSummary : IViewModel

@@ -17,8 +17,8 @@ namespace Global.Penyewaan.Domain
 
         public void CreateRentalHeader(RentalHeader header)
         {
-            string query = String.Format("INSERT INTO tblrentalheader (rentalid,rentalno,transactiondate,duedate,custid) values ('{0}','{1}','{2}','{3}','{4}')",
-                header.RentalId, header.RentalNo, header.TransactionDate, header.DueDate, header.CustomerId);
+            string query = String.Format("INSERT INTO tblrentalheader (rentalid,rentalno,transactiondate,duedate,custid,status) values ('{0}','{1}','{2}','{3}','{4}','{5}')",
+                header.RentalId, header.RentalNo, header.TransactionDate, header.DueDate, header.CustomerId,header.Status);
             qryObjectMapper.Map<RentalHeader>(query);
         }
         public void CreateRentalItem(RentalItem item)
@@ -32,6 +32,11 @@ namespace Global.Penyewaan.Domain
             string query = String.Format("INSERT INTO tblrentalsummary (rentalid,total) values ('{0}','{1}')",
                 summary.RentalId, summary.Total);
             qryObjectMapper.Map<RentalSummary>(query);
+        }
+        public void UpdateRentalHeader(RentalHeader header)
+        {
+            string query = String.Format("UPDATE tblrentalheader set status = '{0}' where rentalid = '{1}'", header.Status, header.RentalId);
+            qryObjectMapper.Map<RentalHeader>(query);
         }
     }
 }

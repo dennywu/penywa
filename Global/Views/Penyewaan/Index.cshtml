@@ -11,6 +11,7 @@
                         <th>Tanggal</th>
                         <th style="text-align:right;">Total</th>
                         <th style="text-align:right;">Sisa Tagihan</th>
+                        <th style="text-align:center;">Status</th>
                     </tr>
                 </thead>
                 <tbody> 
@@ -22,6 +23,9 @@
                             <td>@item.TransactionDate.Date.ToString("dd MMM yyyy")</td>
                             <td style="text-align:right;">Rp @item.Total.ToString("N")</td>
                             <td style="text-align:right;">Rp @item.OutStanding.ToString("N")</td>
+                            <td style="text-align:center;">
+                                <b>@item.Status</b>
+                            </td>
                         </tr>
                     }
                 </tbody>
