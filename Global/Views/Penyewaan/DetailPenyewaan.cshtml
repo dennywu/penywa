@@ -53,8 +53,8 @@
                                 <td>@item.PartName</td> 
                                 <td>@item.Description</td>
                                 <td class="rightAlign">@item.Qty</td>
-                                <td class="rightAlign">Rp. @item.Harga.ToString("N")</td>
-                                <td class="rightAlign">Rp. @item.Total.ToString("N")</td> 
+                                <td class="rightAlign">Rp @item.Harga.ToString("N")</td>
+                                <td class="rightAlign">Rp @item.Total.ToString("N")</td> 
                             </tr>
                             no = no + 1;
                         }
@@ -63,7 +63,7 @@
                         <tr>
                             <td colspan="4"></td>
                             <td class="summaryField">Total</td>
-                            <td class="summaryField">Rp. @ViewBag.Summary.Total.ToString("N")</td>
+                            <td class="summaryField">Rp @ViewBag.Summary.Total.ToString("N")</td>
                         </tr>
                     </tfoot>
                 </table>

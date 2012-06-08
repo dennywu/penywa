@@ -1,0 +1,93 @@
+﻿<link href="@Url.Content("~/Content/penerimaan/add.css")" type="text/css" rel="Stylesheet" />
+<link href="@Url.Content("~/Content/penerimaan/addItem.css")" type="text/css" rel="Stylesheet" />
+<script src="@Url.Content("~/Scripts/penerimaan/penerimaan.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/penyewaan/selectCustomer.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/penerimaan/penerimaanItem.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/CurrencyRounding.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/FormatDateTime.js")" type="text/javascript"></script>
+<h2>Tambah Penerimaan</h2>
+<table cellpadding="0" cellspacing="0" width="80%">
+    <tr>
+        <td>
+            <table cellpadding="0" cellspacing="0" id='tblHeaderPenerimaan'>
+                <tr>
+                    <td class="red">Pilih Pelanggan</td>
+                    <td>
+                        <span id='statusSelectCust'></span>
+                        <input type="text" name="Name" id='inputCustomer' required placeholder='Ketik Nama Pelanggan' autocomplete="off"/>
+                        
+                        <input type='hidden' id='custId' />
+                        <div id='searchCustResult'></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>No Transaksi#</td>
+                    <td class='value'>Otomatis Tercetak</td>
+                </tr>
+                <tr>
+                    <td>Tanggal Transaksi</td>
+                    <td><input type="text" name="transactiondate" required placeholder="Pilih Tanggal Transaksi" id='transactiondate'/></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table class="table table-striped" id='tblreceiveitem'>
+                <thead>
+                    <tr>
+                        <th>No Peminjaman</th>
+                        <th>Tanggal</th>
+                        <th width="10%" class='right'>Total</th>
+                        <th width="20%" class='right'>Denda</th>
+                        <th width="20%" class='right'>Total Setelah Denda</th>
+                        <th width="20%" class='right'>total Dibayar</th>
+                        <th width="3%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3"><div id='selectRental'><b style='font-size:14px;'>+</b> <span style='font-size:11px;'>Pilih Penyewaan</span></div></td>
+                        <td class='right'><span class='summary'>Total Akhir</span> </td>
+                        <td class='right'>
+                            <span class='summary summaryCcy'>Rp</span>
+                            <span class='summary summaryValue' id='totalakhir'></span>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div id='btnFooter'>
+                <button id='btnSave'>Simpan</button>
+                @Html.ActionLink("Batal", "Index", "Penerimaan")
+            </div>
+        </td>
+    </tr>
+</table>
+<div id="DialogRentalList" style="display:none;">
+    <div class="DialogOverlay"></div>
+    <div class="RentalList">
+        <div class="RentalListHeader">
+            Detail Rental Yang Belum Dibayar
+            <span id="CloseBtn">X</span>
+        </div>
+        <div class="RentalListContent">
+            <table id="TblRentalListContent" width="100%">
+                <thead>
+                    <tr>
+                        <th class="RentalNo">Rental No</th>
+                        <th class="Customer">NamaPelanggan</th>
+                        <th class="TransactionDate">Tanggal</th>
+                        <th class="Total">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>

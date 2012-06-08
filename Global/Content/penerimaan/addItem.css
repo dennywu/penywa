@@ -1,0 +1,224 @@
+﻿#addRow
+{
+    color:Green;
+    cursor:pointer;
+}
+#addRow:hover
+{
+    color:#666;
+}
+.itemRemove
+{
+    font-weight:bold;
+    color:Red;
+    cursor:pointer;
+    display:none;
+    text-align:center;
+    margin-right:-10px;
+}
+.itemRemove:hover
+{
+    color:#666;
+}
+.itemqty
+{
+    width:50px;
+}
+.itemharga
+{
+    width:120px;
+}
+.itemtotalCcy
+{
+    width: 30px;
+    float: left;
+    text-align: right;
+    display:none;
+}
+.itemtotalValue
+{
+    width: 120px;
+    float: right;
+    text-align:right;
+}
+.itemSearchResult
+{
+    width: 216px;
+    background-color: #f7f2c7;
+    position: absolute;
+    z-index: 100;
+    margin-top: -9px;
+}
+
+.itemSearchResult .contain
+{
+    padding: 5px;
+    border-left: 1px solid #CCC;
+    border-right: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+    cursor:pointer;
+}
+.itemSearchResult .contain:hover
+{
+    background-color:#dfdaad;
+}
+.itemSearchResult .contain .itemName
+{
+    font-weight:bold;
+    color:#000;
+}
+.itemSearchResult .contain .itemDeskripsi
+{
+    color:#333;
+    font-size:11px;
+}
+.summary
+{
+    display:none;
+    font-weight:bold;
+}
+.summaryCcy
+{
+    width: 30px;
+    float: left;
+    text-align: right;
+    display:none;
+}
+.summaryValue
+{
+    width: 120px;
+    float: right;
+    text-align:right;
+}
+
+div.DialogOverlay
+{
+    width: 100%;
+    height: 100%;
+    filter: alpha(opacity=60);
+    -moz-opacity: 0.6;
+    -khtml-opacity: 0.6;
+    opacity: 0.6;
+    background: white;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 500;
+}
+div.RentalList
+{
+    width: 876px;
+    background-color: white;
+    -webkit-box-shadow: 5px 7px 29px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 5px 7px 29px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    z-index: 750;
+    top: 10%;
+    left: 17%;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border: 1px solid #034AF3;
+}
+span#CloseBtn
+{
+    padding: 0px 5px 0px 5px;
+    float: right;
+    border: 1px #CCC solid;
+    border-radius: 3px 3px 3px 3px;
+    cursor: pointer;
+}
+span#CloseBtn:hover
+{
+    background-color:#E8EEF4;
+    color:#034AF3;
+}
+
+div.RentalListHeader
+{
+    padding: 20px 15px;
+    margin: 0;
+    background: -webkit-linear-gradient(top, #79BCFF, #5C87B2);
+    background: -moz-linear-gradient(top, #79BCFF, #5C87B2);
+    -moz-border-radius: 6px 6px 0 0;
+    -webkit-border-radius: 6px 6px 0 0;
+    border-radius: 6px 6px 0 0;
+    color:#FAFAFA;
+    font-size: 21px;
+}
+
+div.RentalListContent
+{
+    height: 300px;
+    padding: 15px 3px 0 5px;
+    -moz-border-radius: 0 0 6px 6px;
+    -webkit-border-radius: 0 0 6px 6px;
+    border-radius: 0 0 6px 6px;
+    
+}
+table#TblRentalListContent tbody
+{
+    width: 99%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 240px;
+    position: absolute;
+    z-index: 900;
+}
+
+table#TblRentalListContent thead tr th
+{
+    border: #CCC 1px solid;
+    font: "trebuchet MS";
+    font-size: 14px;
+    font-weight: bold;
+    color: #F2F2F2;
+    background-color: #5389FA;
+    padding: 3px 0px 3px 5px;
+}
+table#TblRentalListContent tbody tr td
+{
+    font-size: 12px;
+    border: #CCC 1px solid;
+    padding: 2px 2px 2px 5px;
+}
+
+table#TblRentalListContent tbody tr:hover
+{
+    background-color:#CCC;
+    cursor:pointer;
+}
+
+th.RentalNo
+{
+    width:125px;
+}
+th.Customer
+{
+    /*width:10%;*/
+}
+th.TransactionDate
+{
+    width:150px;
+}
+th.Total
+{
+    width:150px;
+}
+
+td.RentalNo
+{
+    width:122px;
+}
+td.Customer
+{
+    width:416px;
+}
+td.TransactionDate
+{
+    width:148px;
+}
+td.Total
+{
+    width:131px;
+}
