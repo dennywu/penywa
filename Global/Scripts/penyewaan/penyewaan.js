@@ -27,7 +27,7 @@ RENTAL.setupDatePicker = function () {
 
 RENTAL.save = function () {
     var data = {};
-    data.CustomerId = $("#custId").val();
+    data.CustId = $("#custId").val();
     data.TransactionDate = $("#fromdate").val();
     data.DueDate = $("#todate").val();
     data.Items = [];

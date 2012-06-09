@@ -46,3 +46,14 @@ div#RentalItemDiv
     width:50%;
     background-color:#FAFAFA;
 }
+.rightButton
+{
+    cursor:pointer;   
+    color:Blue;
+    font-weight:bold;
+}
+.rightButton:hover
+{
+    background-color:#f8f8f8;
+    color:Red;
+}

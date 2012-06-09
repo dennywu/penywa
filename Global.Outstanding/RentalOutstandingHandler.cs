@@ -28,5 +28,12 @@ namespace Global.Outstanding
             string query = String.Format("UPDATE tblrentaloutstanding set outstanding = '{0}' where rentalid = '{1}'", (rentalOutstanding.Outstanding - outstanding), rentalId);
             qryObjectMapper.Map<RentalOutstanding>(query);
         }
+
+        public void AddOutstanding(Guid rentalId, decimal outstanding)
+        {
+            RentalOutstanding rentalOutstanding = qryObjectMapper.Map<RentalOutstanding>("GetOustanding", new string[1] { "id" }, new object[1] { rentalId }).FirstOrDefault();
+            string query = String.Format("UPDATE tblrentaloutstanding set outstanding = '{0}' where rentalid = '{1}'", (rentalOutstanding.Outstanding + outstanding), rentalId);
+            qryObjectMapper.Map<RentalOutstanding>(query);
+        }
     }
 }

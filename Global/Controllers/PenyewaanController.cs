@@ -17,10 +17,13 @@ namespace Global.Controllers
     public class PenyewaanController : Controller
     {
         private PenyewaanDomain _domain;
-        IRentalReportingRepository rentalreportingRepo;
-        ICustomerRepository custRepo;
+        private IRentalReportingRepository rentalreportingRepo;
+        private IRentalRepository rentalRepo;
+        private ICustomerRepository custRepo;
         private RentalOutstandingHandler _outstanding;
         private CustomerOutstandingHandler _custoutstanding;
+        private IItemRepository itemRepo;
+        
         [Authorize]
         public ActionResult Index()
         {
@@ -44,7 +47,7 @@ namespace Global.Controllers
             CreateRentalItem(rent);
             decimal outstanding = CreateRentalSummary(rent);
             Outstanding.CreateNewOutstandingRental(rent.RentalId, outstanding);
-            CustomerOutstanding.AddOutstanding(rent.CustomerId, outstanding);
+            CustomerOutstanding.AddOutstanding(rent.CustId, outstanding);
             return Json(new { redirectTo = Url.Action("DetailPenyewaan", "Penyewaan", new { rentalId = rentalId.ToString() }) }, JsonRequestBehavior.AllowGet);
         }
 
@@ -85,19 +88,79 @@ namespace Global.Controllers
         {
             RentalHeader header = new RentalHeader
             {
-                CustomerId = rent.CustomerId,
+                CustId = rent.CustId,
                 DueDate = rent.DueDate,
                 RentalId = rent.RentalId,
                 RentalNo = rent.RentalNo,
-                TransactionDate = rent.TransactionDate
+                TransactionDate = rent.TransactionDate,
+                Status = RentalStatus.APPROVED
             };
             Penyewaan.CreateRentalHeader(header);
+        }
+        public ActionResult DetailPenyewaan(string rentalId)
+        {
+            Guid _rentalId = new Guid(rentalId);
+            Global.ReportingRepository.model.RentalHeader rentalHeader = RentalReportingRepository.GetRentalHeaderById(_rentalId);
+            ViewBag.CustomerName = CustomerRepository.GetCustomerById(rentalHeader.CustId).Name;
+            ViewBag.RentalItems = RentalReportingRepository.GetRentalItemByRentalId(_rentalId);
+            ViewBag.Summary = RentalReportingRepository.GetRentalSummaryByRentalId(_rentalId);
+            return View(rentalHeader);
+        }
+
+        public ActionResult ReturnRental(Guid rentalId)
+        {
+            RentalHeader header = RentalRepository.GetRentalHeaderById(rentalId);
+            header.Status = RentalStatus.RETURN;
+            Penyewaan.UpdateRentalHeader(header);
+            DateTime today = DateTime.UtcNow.Date;
+            int latedate = today.CompareTo(header.DueDate) > 0 ? today.CompareTo(header.DueDate) : 0;
+
+            IList<RentalItem> items = RentalRepository.GetRentalItemById(rentalId);
+            decimal totalDenda = 0;
+            decimal total = 0;
+            foreach (RentalItem item in items)
+            {
+                decimal dendaPerHari = ItemRepository.GetItemById(item.ItemId).DendaPerHari;
+                item.Denda = (dendaPerHari * latedate) * item.Qty;
+                item.Total += item.Denda;
+                Penyewaan.UpdateRentalItem(item);
+                totalDenda += item.Denda;
+                total += item.Total;
+            }
+
+            RentalSummary summary = RentalRepository.GetRentalSummaryById(rentalId);
+            summary.TotalDenda = totalDenda;
+            summary.Total = total;
+            Penyewaan.UpdateRentalSummary(summary);
+
+            Outstanding.AddOutstanding(rentalId, totalDenda);
+            CustomerOutstanding.AddOutstanding(header.CustId, totalDenda);
+            return RedirectToAction("DetailPenyewaan", new { rentalId = rentalId });
+        }
+
+        private IRentalReportingRepository RentalReportingRepository
+        {
+            get
+            {
+                if (rentalreportingRepo == null)
+                    rentalreportingRepo = (IRentalReportingRepository)ContextRegistry.GetContext().GetObject("RentalReportingRepository");
+                return rentalreportingRepo;
+            }
+        }
+        private ICustomerRepository CustomerRepository
+        {
+            get
+            {
+                if (custRepo == null)
+                    custRepo = (ICustomerRepository)ContextRegistry.GetContext().GetObject("CustomerRepository");
+                return custRepo;
+            }
         }
         private PenyewaanDomain Penyewaan
         {
             get
             {
-                if(_domain == null)
+                if (_domain == null)
                     _domain = (PenyewaanDomain)ContextRegistry.GetContext().GetObject("PenyewaanDomain");
                 return _domain;
             }
@@ -120,32 +183,22 @@ namespace Global.Controllers
                 return _custoutstanding;
             }
         }
-        public ActionResult DetailPenyewaan(string rentalId)
-        {
-            Guid _rentalId = new Guid(rentalId);
-            Global.ReportingRepository.model.RentalHeader rentalHeader = RentalReportingRepository.GetRentalHeaderById(_rentalId);
-            ViewBag.CustomerName = CustomerRepository.GetCustomerById(rentalHeader.CustId).Name;
-            ViewBag.RentalItems = RentalReportingRepository.GetRentalItemByRentalId(_rentalId);
-            ViewBag.Summary = RentalReportingRepository.GetRentalSummaryByRentalId(_rentalId);
-            return View(rentalHeader);
-        }
-        
-        private IRentalReportingRepository RentalReportingRepository
+        private IRentalRepository RentalRepository
         {
             get
             {
-                if (rentalreportingRepo == null)
-                    rentalreportingRepo = (IRentalReportingRepository)ContextRegistry.GetContext().GetObject("RentalReportingRepository");
-                return rentalreportingRepo;
+                if (rentalRepo == null)
+                    rentalRepo = (IRentalRepository)ContextRegistry.GetContext().GetObject("RentRepository");
+                return rentalRepo;
             }
         }
-        private ICustomerRepository CustomerRepository
+        private IItemRepository ItemRepository
         {
             get
             {
-                if (custRepo == null)
-                    custRepo = (ICustomerRepository)ContextRegistry.GetContext().GetObject("CustomerRepository");
-                return custRepo;
+                if (itemRepo == null)
+                    itemRepo = (IItemRepository)ContextRegistry.GetContext().GetObject("ItemRepository");
+                return itemRepo;
             }
         }
     }
