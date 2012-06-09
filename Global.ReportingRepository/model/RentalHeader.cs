@@ -21,6 +21,7 @@ namespace Global.ReportingRepository.model
     public class RentalSummary : IViewModel
     {
         public Guid RentalId { get; set; }
+        public decimal TotalDenda { get; set; }
         public decimal Total { get; set; }
     }
 }

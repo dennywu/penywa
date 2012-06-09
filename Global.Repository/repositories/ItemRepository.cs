@@ -27,7 +27,7 @@ namespace Global.Repository
         public void UpdateItem(Item item)
         {
             string query = String.Format("UPDATE tblitem set name= '{0}', deskripsi = '{1}', harga = '{2}', dendaperhari= '{3}' where itemid = '{4}'",
-                item.Name, item.Deskripsi, item.Harga,item.DendaPerHari, item.ItemId);
+                item.Name, item.Deskripsi, item.Harga, item.DendaPerHari, item.ItemId);
             qryObjectMapper.Map<Item>(query);
         }
         public Item GetItemById(long id)

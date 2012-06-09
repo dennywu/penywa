@@ -22,6 +22,7 @@ namespace Global.Controllers
         private ICustomerRepository custRepo;
         private RentalOutstandingHandler _outstanding;
         private CustomerOutstandingHandler _custoutstanding;
+        private IItemRepository itemRepo;
         
         [Authorize]
         public ActionResult Index()
@@ -46,7 +47,7 @@ namespace Global.Controllers
             CreateRentalItem(rent);
             decimal outstanding = CreateRentalSummary(rent);
             Outstanding.CreateNewOutstandingRental(rent.RentalId, outstanding);
-            CustomerOutstanding.AddOutstanding(rent.CustomerId, outstanding);
+            CustomerOutstanding.AddOutstanding(rent.CustId, outstanding);
             return Json(new { redirectTo = Url.Action("DetailPenyewaan", "Penyewaan", new { rentalId = rentalId.ToString() }) }, JsonRequestBehavior.AllowGet);
         }
 
@@ -87,7 +88,7 @@ namespace Global.Controllers
         {
             RentalHeader header = new RentalHeader
             {
-                CustomerId = rent.CustomerId,
+                CustId = rent.CustId,
                 DueDate = rent.DueDate,
                 RentalId = rent.RentalId,
                 RentalNo = rent.RentalNo,
@@ -111,6 +112,29 @@ namespace Global.Controllers
             RentalHeader header = RentalRepository.GetRentalHeaderById(rentalId);
             header.Status = RentalStatus.RETURN;
             Penyewaan.UpdateRentalHeader(header);
+            DateTime today = DateTime.UtcNow.Date;
+            int latedate = today.CompareTo(header.DueDate) > 0 ? today.CompareTo(header.DueDate) : 0;
+
+            IList<RentalItem> items = RentalRepository.GetRentalItemById(rentalId);
+            decimal totalDenda = 0;
+            decimal total = 0;
+            foreach (RentalItem item in items)
+            {
+                decimal dendaPerHari = ItemRepository.GetItemById(item.ItemId).DendaPerHari;
+                item.Denda = (dendaPerHari * latedate) * item.Qty;
+                item.Total += item.Denda;
+                Penyewaan.UpdateRentalItem(item);
+                totalDenda += item.Denda;
+                total += item.Total;
+            }
+
+            RentalSummary summary = RentalRepository.GetRentalSummaryById(rentalId);
+            summary.TotalDenda = totalDenda;
+            summary.Total = total;
+            Penyewaan.UpdateRentalSummary(summary);
+
+            Outstanding.AddOutstanding(rentalId, totalDenda);
+            CustomerOutstanding.AddOutstanding(header.CustId, totalDenda);
             return RedirectToAction("DetailPenyewaan", new { rentalId = rentalId });
         }
 
@@ -166,6 +190,15 @@ namespace Global.Controllers
                 if (rentalRepo == null)
                     rentalRepo = (IRentalRepository)ContextRegistry.GetContext().GetObject("RentRepository");
                 return rentalRepo;
+            }
+        }
+        private IItemRepository ItemRepository
+        {
+            get
+            {
+                if (itemRepo == null)
+                    itemRepo = (IItemRepository)ContextRegistry.GetContext().GetObject("ItemRepository");
+                return itemRepo;
             }
         }
     }

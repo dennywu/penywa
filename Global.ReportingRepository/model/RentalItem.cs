@@ -12,9 +12,10 @@ namespace Global.ReportingRepository.model
         public long Id { get; set; }
         public Guid RentalId { get; set; }
         public int ItemId { get; set; }
-        public string Description { get; set; }
+        public string Deskripsi { get; set; }
         public int Qty { get; set; }
         public decimal Harga { get; set; }
+        public decimal Denda { get; set; }
         public decimal Total { get; set; }
         public string PartName { get; set; }
     }
