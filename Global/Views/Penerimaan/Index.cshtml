@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IList<Global.ReportingRepository.model.ReceiveListViewReport>
+@{
     ViewBag.Title = "Penerimaan";
 }
 
@@ -16,7 +17,15 @@
                     </tr>
                 </thead>
                 <tbody> 
-                    
+                    @foreach (var receive in @Model)
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(receive.ReceiveNo,"Index","Penerimaan")</td>
+                            <td>@receive.CustomerName</td>
+                            <td>@receive.ReceiveDate.ToString("dd MMM yyyy")</td>
+                            <td style="text-align:right;">Rp @receive.Total.ToString("N")</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </td>

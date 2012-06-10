@@ -34,5 +34,13 @@ namespace Global.ReportingRepository
         {
             return qryObjectMapper.Map<RentalListViewReport>("GetRentalListView",new string[]{},new object[]{}).ToList();
         }
+        public IList<RentalListViewReport> GetReturnedListViewbyCustId(int custId)
+        {
+            return qryObjectMapper.Map<RentalListViewReport>("GetReturnedRentalListViewByCustomerId", new string[1] { "custId" }, new object[1] { custId }).ToList();
+        }
+        public RentalOutstanding GetRentalOutstandingByRentalId(Guid rentalId)
+        {
+            return qryObjectMapper.Map<RentalOutstanding>("FindById", new string[1] { "Id" }, new object[1] { rentalId }).FirstOrDefault();
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿<link href="@Url.Content("~/Content/penerimaan/add.css")" type="text/css" rel="Stylesheet" />
 <link href="@Url.Content("~/Content/penerimaan/addItem.css")" type="text/css" rel="Stylesheet" />
 <script src="@Url.Content("~/Scripts/penerimaan/penerimaan.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/penyewaan/selectCustomer.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/penerimaan/selectCustomer.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/penerimaan/penerimaanItem.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/CurrencyRounding.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/FormatDateTime.js")" type="text/javascript"></script>
@@ -38,10 +38,11 @@
                     <tr>
                         <th>No Peminjaman</th>
                         <th>Tanggal</th>
-                        <th width="10%" class='right'>Total</th>
-                        <th width="20%" class='right'>Denda</th>
-                        <th width="20%" class='right'>Total Setelah Denda</th>
-                        <th width="20%" class='right'>total Dibayar</th>
+                        <th width="13%" class='right'>Total</th>
+                        <th width="13%" class='right'>Denda</th>
+                        <th width="17%" class='right'>Total Setelah Denda</th>
+                        <th width="13%" class='right'>Sisa Tagihan</th>
+                        <th width="15%" class='right'>Total Dibayar</th>
                         <th width="3%"></th>
                     </tr>
                 </thead>
@@ -49,7 +50,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="3"><div id='selectRental'><b style='font-size:14px;'>+</b> <span style='font-size:11px;'>Pilih Penyewaan</span></div></td>
+                        <td colspan="5"><div id='selectRental'><b style='font-size:14px;'>+</b> <span style='font-size:11px;'>Pilih Penyewaan</span></div></td>
                         <td class='right'><span class='summary'>Total Akhir</span> </td>
                         <td class='right'>
                             <span class='summary summaryCcy'>Rp</span>
@@ -79,8 +80,9 @@
                     <tr>
                         <th class="RentalNo">Rental No</th>
                         <th class="Customer">NamaPelanggan</th>
-                        <th class="TransactionDate">Tanggal</th>
-                        <th class="Total">Total</th>
+                        <th class="TransactionDate center">Tanggal</th>
+                        <th class="Total right">Total</th>
+                        <th class="Outstanding right" style="padding-right:20px;">Sisa Tagihan</th>
                     </tr>
                 </thead>
                 <tbody>

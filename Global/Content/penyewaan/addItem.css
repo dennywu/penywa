@@ -27,6 +27,7 @@
 .itemharga
 {
     width:120px;
+    float: right;
 }
 .itemtotalCcy
 {

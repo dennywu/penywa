@@ -1,7 +1,7 @@
 ﻿var RECEIVE = {};
 $(document).ready(function () {
     var selectCust = RECEIVE.SELECTCUSTOMER;
-//    RECEIVE.SELECTCUSTOMER.setupSelectCustomer();
+    RECEIVE.SELECTCUSTOMER.setupSelectCustomer();
     RECEIVE.setupDatePicker();
     RECEIVE.ITEM.setupReceiveItem();
     $("#btnSave").click(RECEIVE.save);
@@ -19,20 +19,16 @@ RECEIVE.setupDatePicker = function () {
 
 RECEIVE.save = function () {
     var data = {};
-    data.CustomerId = $("#custId").val();
-    data.TransactionDate = $("#transactiondate").val();
+    data.CustId = $("#custId").val();
+    data.ReceiveDate = $("#transactiondate").val();
     data.Items = [];
-    $("#tblitem tbody tr").each(function (i) {
-        if ($('.inputRentalNo').length != 0) {
-            if ($('.inputRentalNo').get(i).value != "") {
-                data.Items[i] = {};
-                data.Items[i].RentalIdId = $('.rentalId').get(i).value;
-                data.Items[i].TransactionDate = $('.transactionDate').get(i).value;
-                data.Items[i].Total = $('.total').get(i).value;
-                data.Items[i].Denda = $('.denda').get(i).value;
-                data.Items[i].PayAmount = $('.payAmount').get(i).value;
-            }
-        }
+    $("#tblreceiveitem tbody tr").each(function (i) {
+        data.Items[i] = {};
+        data.Items[i].RentalId = $('.receiveItemId').get(i).value;
+        data.Items[i].Total = $('.rentalTotal').get(i).value;
+        data.Items[i].TotalDenda = $('.rentalDenda').get(i).value;
+        data.Items[i].TotalAfterDenda = $('.rentalTotalAfterDenda').get(i).value;
+        data.Items[i].PayAmount = $('.rentalPayAmount').get(i).value;
     });
 
     console.log(data);

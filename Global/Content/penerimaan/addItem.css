@@ -1,13 +1,13 @@
-﻿#addRow
+﻿#selectRental
 {
     color:Green;
     cursor:pointer;
 }
-#addRow:hover
+#selectRental:hover
 {
     color:#666;
 }
-.itemRemove
+.rentalRemove
 {
     font-weight:bold;
     color:Red;
@@ -16,61 +16,9 @@
     text-align:center;
     margin-right:-10px;
 }
-.itemRemove:hover
+.rentalRemove:hover
 {
     color:#666;
-}
-.itemqty
-{
-    width:50px;
-}
-.itemharga
-{
-    width:120px;
-}
-.itemtotalCcy
-{
-    width: 30px;
-    float: left;
-    text-align: right;
-    display:none;
-}
-.itemtotalValue
-{
-    width: 120px;
-    float: right;
-    text-align:right;
-}
-.itemSearchResult
-{
-    width: 216px;
-    background-color: #f7f2c7;
-    position: absolute;
-    z-index: 100;
-    margin-top: -9px;
-}
-
-.itemSearchResult .contain
-{
-    padding: 5px;
-    border-left: 1px solid #CCC;
-    border-right: 1px solid #CCC;
-    border-bottom: 1px solid #CCC;
-    cursor:pointer;
-}
-.itemSearchResult .contain:hover
-{
-    background-color:#dfdaad;
-}
-.itemSearchResult .contain .itemName
-{
-    font-weight:bold;
-    color:#000;
-}
-.itemSearchResult .contain .itemDeskripsi
-{
-    color:#333;
-    font-size:11px;
 }
 .summary
 {
@@ -86,7 +34,7 @@
 }
 .summaryValue
 {
-    width: 120px;
+    width: 90px;
     float: right;
     text-align:right;
 }
@@ -174,18 +122,18 @@ table#TblRentalListContent thead tr th
     font-weight: bold;
     color: #F2F2F2;
     background-color: #5389FA;
-    padding: 3px 0px 3px 5px;
+    padding: 3px 5px 3px 5px;
 }
 table#TblRentalListContent tbody tr td
 {
     font-size: 12px;
     border: #CCC 1px solid;
-    padding: 2px 2px 2px 5px;
+    padding: 2px 5px 2px 5px;
 }
 
 table#TblRentalListContent tbody tr:hover
 {
-    background-color:#CCC;
+    background-color:#FAFAFA;
     cursor:pointer;
 }
 
@@ -203,22 +151,47 @@ th.TransactionDate
 }
 th.Total
 {
-    width:150px;
+    width:145px;
+}
+th.Outstanding
+{
+    width:130px;
 }
 
 td.RentalNo
 {
-    width:122px;
+    width:124px;
 }
 td.Customer
 {
-    width:416px;
+    width:247px;
 }
 td.TransactionDate
 {
-    width:148px;
+    width:149px;
 }
 td.Total
 {
-    width:131px;
+    width:146px;
+}
+td.Outstanding
+{
+    width:128px;
+}
+.rentalPayAmount
+{
+    width:110px;
+    float:right;
+}
+.rentalCcy
+{
+    width: 30px;
+    float: left;
+    text-align: right;
+}
+.rentalNumericValue
+{
+    width: 72px;
+    float: right;
+    text-align: right;
 }

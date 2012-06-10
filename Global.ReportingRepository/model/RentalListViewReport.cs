@@ -19,6 +19,20 @@ namespace Global.ReportingRepository.model
                     tblcustomer c on h.custid = c.id inner join 
                     tblrentalsummary s on h.rentalid = s.rentalid inner join
                     tblrentaloutstanding o on h.rentalid = o.rentalid")]
+    [NamedSqlQuery("GetReturnedRentalListViewByCustomerId", @"SELECT 
+                    h.rentalid,
+                    h.rentalno,
+                    h.status,
+                    c.name as CustomerName,
+                    h.transactiondate,
+                    h.duedate,
+                    s.total,
+                    o.outstanding 
+                    FROM tblrentalheader h inner join 
+                    tblcustomer c on h.custid = c.id inner join 
+                    tblrentalsummary s on h.rentalid = s.rentalid inner join
+                    tblrentaloutstanding o on h.rentalid = o.rentalid
+                    where h.custid=@custId and h.status='Return' and o.outstanding<>0")]
     public class RentalListViewReport : IViewModel
     {
         public Guid RentalId { get; set; }

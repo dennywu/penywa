@@ -24,4 +24,11 @@ namespace Global.ReportingRepository.model
         public decimal TotalDenda { get; set; }
         public decimal Total { get; set; }
     }
+
+    [NamedSqlQuery("FindById", "select * from tblrentaloutstanding where rentalid=@Id")]
+    public class RentalOutstanding : IViewModel
+    {
+        public Guid RentalId { get; set; }
+        public decimal Outstanding { get; set; }
+    }
 }

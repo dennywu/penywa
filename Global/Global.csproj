@@ -184,6 +184,7 @@
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Scripts\penerimaan\penerimaanItem.js" />
     <Content Include="Scripts\penerimaan\penerimaan.js" />
+    <Content Include="Scripts\penerimaan\selectCustomer.js" />
     <Content Include="Scripts\penyewaan\addItem.js" />
     <Content Include="Scripts\penyewaan\selectCustomer.js" />
     <Content Include="Scripts\penyewaan\penyewaan.js" />
@@ -230,6 +231,10 @@
     <ProjectReference Include="..\Global.Outstanding\Global.Outstanding.csproj">
       <Project>{D90A5440-D704-44A6-A5F4-C24D6984A5BD}</Project>
       <Name>Global.Outstanding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Global.Penerimaan.Domain\Global.Penerimaan.Domain.csproj">
+      <Project>{99DF0E44-9698-44A9-844B-B56A323CAD3C}</Project>
+      <Name>Global.Penerimaan.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Global.Penyewaan.Domain\Global.Penyewaan.Domain.csproj">
       <Project>{565A981A-743E-4D93-A3BE-FB3D4FD084A1}</Project>
