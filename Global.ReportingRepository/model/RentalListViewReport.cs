@@ -32,7 +32,7 @@ namespace Global.ReportingRepository.model
                     tblcustomer c on h.custid = c.id inner join 
                     tblrentalsummary s on h.rentalid = s.rentalid inner join
                     tblrentaloutstanding o on h.rentalid = o.rentalid
-                    where h.custid=@custId and h.status='Return' and o.outstanding<>0")]
+                    where h.custid=@custId and o.outstanding<>0")]
     public class RentalListViewReport : IViewModel
     {
         public Guid RentalId { get; set; }
