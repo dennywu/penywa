@@ -137,6 +137,11 @@ namespace Global.Controllers
             CustomerOutstanding.AddOutstanding(header.CustId, totalDenda);
             return RedirectToAction("DetailPenyewaan", new { rentalId = rentalId });
         }
+        public JsonResult HistoryReceive(Guid id)
+        {
+            IList<Global.ReportingRepository.model.HistoryReceive> history = RentalReportingRepository.GetHistoryReceiveByRentalId(id);
+            return Json(history, JsonRequestBehavior.AllowGet);
+        }
 
         private IRentalReportingRepository RentalReportingRepository
         {

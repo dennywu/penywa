@@ -42,5 +42,9 @@ namespace Global.ReportingRepository
         {
             return qryObjectMapper.Map<RentalOutstanding>("FindById", new string[1] { "Id" }, new object[1] { rentalId }).FirstOrDefault();
         }
+        public IList<HistoryReceive> GetHistoryReceiveByRentalId(Guid rentalId)
+        {
+            return qryObjectMapper.Map<HistoryReceive>("GetHistoryReceiveByRentalId", new string[1] { "id" }, new object[1] { rentalId }).ToList();
+        }
     }
 }

@@ -22,13 +22,21 @@ namespace Global.Controllers
         private RentalOutstandingHandler _outstanding;
         private IRentalReportingRepository rentalreportingRepo;
         private IReceiveReportingRepository receivereportingRepo;
-        //
-        // GET: /Pembayaran/
+        private ICustomerRepository custRepo;
 
         public ActionResult Index()
         {
             IList<ReceiveListViewReport> listView = ReceiveReportingRepository.GetListView();
             return View(listView);
+        }
+
+        public ActionResult DetailPenerimaan(Guid receiveId)
+        {
+            ReceiveHeaderReport rcvHeader = ReceiveReportingRepository.GetReceiveHeaderByReceiveId(receiveId);
+            ViewBag.CustomerName = CustomerRepository.GetCustomerById(rcvHeader.CustId).Name;
+            ViewBag.ReceiveItems = ReceiveReportingRepository.GetReceiveItemById(receiveId);
+            ViewBag.Summary = ReceiveReportingRepository.GetReceiveSummaryByReceiveId(receiveId);
+            return View(rcvHeader);
         }
 
         public ActionResult AddPenerimaan()
@@ -42,7 +50,7 @@ namespace Global.Controllers
             Receive _receive = JsonConvert.DeserializeObject<Receive>(receive);
             Guid receiveId = Guid.NewGuid();
             _receive.ReceiveId = receiveId;
-            _receive.ReceiveNo = "RECEIVE-" + Guid.NewGuid().ToString().GetHashCode().ToString("x");
+            _receive.ReceiveNo = "RCV-" + Guid.NewGuid().ToString().GetHashCode().ToString("x");
             CreateReceiveHeader(_receive);
             CreateReceiveItem(_receive);
             decimal totalPayAmount = CreateReceiveSummary(_receive);
@@ -132,6 +140,8 @@ namespace Global.Controllers
                     , JsonRequestBehavior.AllowGet);
         }
 
+
+
         private IRentalReportingRepository RentalReportingRepository
         {
             get
@@ -141,7 +151,6 @@ namespace Global.Controllers
                 return rentalreportingRepo;
             }
         }
-
         private PenerimaanDomain Penerimaan
         {
             get
@@ -151,7 +160,6 @@ namespace Global.Controllers
                 return _domain;
             }
         }
-
         private CustomerOutstandingHandler CustomerOutstanding
         {
             get
@@ -161,7 +169,6 @@ namespace Global.Controllers
                 return _custoutstanding;
             }
         }
-
         private RentalOutstandingHandler Outstanding
         {
             get
@@ -171,7 +178,6 @@ namespace Global.Controllers
                 return _outstanding;
             }
         }
-
         private IReceiveReportingRepository ReceiveReportingRepository
         {
             get
@@ -179,6 +185,15 @@ namespace Global.Controllers
                 if (receivereportingRepo == null)
                     receivereportingRepo = (IReceiveReportingRepository)ContextRegistry.GetContext().GetObject("ReceiveReportingRepository");
                 return receivereportingRepo;
+            }
+        }
+        private ICustomerRepository CustomerRepository
+        {
+            get
+            {
+                if (custRepo == null)
+                    custRepo = (ICustomerRepository)ContextRegistry.GetContext().GetObject("CustomerRepository");
+                return custRepo;
             }
         }
     }

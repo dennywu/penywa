@@ -1,4 +1,4 @@
-﻿div.RentalHeaderDiv
+﻿div.ReceiveHeaderDiv
 {
     float:left;
     padding:20px 0 10px 10px;
@@ -8,16 +8,16 @@ table.noborder, table.noborder tr, table.noborder td
     border:0;
     border-spacing:0;
 }
-table#RentalItemTbl
+table#ReceiveItemTbl
 {
     border:0;
     border-spacing:0;
 }
-table#RentalItemTbl tbody td
+table#ReceiveItemTbl tbody td
 {
     border-bottom:1px solid #D8D8D8
 }
-table#RentalHeaderTbl, table#RentalHeaderTbl tr, table#RentalHeaderTbl td
+table#ReceiveHeaderTbl, table#ReceiveHeaderTbl tr, table#ReceiveHeaderTbl td
 {
     border:1px solid #D8D8D8
 }
@@ -25,7 +25,7 @@ table#RentalHeaderTbl, table#RentalHeaderTbl tr, table#RentalHeaderTbl td
 {
     text-align:right;
 }
-div#RentalItemDiv
+div#ReceiveItemDiv
 {
     padding:10px 10px 10px 10px;
     margin-bottom:20px;
@@ -56,8 +56,4 @@ div#RentalItemDiv
 {
     background-color:#f8f8f8;
     color:Red;
-}
-#historyReceive thead tr th
-{
-    padding:2px;
 }

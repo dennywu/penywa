@@ -66,6 +66,8 @@
   <ItemGroup>
     <Compile Include="interface\IReceiveReportingRepository.cs" />
     <Compile Include="interface\IRentalReportingRepository.cs" />
+    <Compile Include="model\HistoryReceive.cs" />
+    <Compile Include="model\ReceiveReport.cs" />
     <Compile Include="model\ReceiveListViewReport.cs" />
     <Compile Include="model\RentalHeader.cs" />
     <Compile Include="model\RentalItem.cs" />

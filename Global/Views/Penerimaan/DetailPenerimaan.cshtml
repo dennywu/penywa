@@ -1,0 +1,79 @@
+﻿@model Global.ReportingRepository.model.ReceiveHeaderReport
+@{
+    ViewBag.Title = "Detail Penerimaan";
+    var no = 1;
+}
+<link href="@Url.Content("~/Content/penerimaan/detail.css")" type="text/css" rel="Stylesheet" />
+
+<h2>Detail Penerimaan</h2>
+<table width="100%" style="border:0px solid #FFF;">
+    <tr valign="top">
+        <td width="80%">
+            <table width="100%">
+                <tr>
+                    <td>
+                        <div class="RentalHeaderDiv">
+                        <table id="RentalHeaderTbl">
+                            <tr>
+                                <td class="headerTittle">No Penerimaan</td>
+                                <td class="headerContent">@Model.ReceiveNo</td>
+                            </tr>
+                            <tr>
+                                <td class="headerTittle">Nama Pelanggan</td>
+                                <td class="headerContent">@ViewBag.CustomerName</td>
+                            </tr>
+                            <tr>
+                                <td class="headerTittle">Tanggal Pembayaran</td>
+                                <td class="headerContent">@Model.ReceiveDate.Date.ToString("dd MMMM yyyy")</td>
+                            </tr>
+                        </table>
+                        </div>
+                    </td>
+                </tr>
+                <td>
+                    <div id="RentalItemDiv">
+                        <table id="RentalItemTbl" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>No Penyewaan</th>
+                                    <th class="rightAlign">Total</th>
+                                    <th class="rightAlign">Denda</th>
+                                    <th class="rightAlign">Total Setelah Denda</th>
+                                    <th class="rightAlign">Sisa Tagihan</th>
+                                    <th class="rightAlign">Jumlah Yang DiBayar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.ReceiveItems)
+                                {
+                                    <tr>
+                                        <td>@no</td>
+                                        <td>@item.RentalNo</td> 
+                                        <td class="rightAlign">@item.Total.ToString("N")</td>
+                                        <td class="rightAlign">@item.Denda.ToString("N")</td>
+                                        <td class="rightAlign">Rp @item.TotalAfterDenda.ToString("N")</td>
+                                        <td class="rightAlign">Rp @item.Outstanding.ToString("N")</td> 
+                                        <td class="rightAlign">Rp @item.PayAmount.ToString("N")</td> 
+                                    </tr>
+                                    no = no + 1;
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5"></td>
+                                    <td class="summaryField">Total</td>
+                                    <td class="summaryField">Rp @ViewBag.Summary.Total.ToString("N")</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            </table>
+        </td>
+        <td align="center">
+        </td>
+    </tr>
+    
+</table>      

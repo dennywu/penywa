@@ -9,5 +9,8 @@ namespace Global.ReportingRepository
 	public interface IReceiveReportingRepository
 	{
         IList<ReceiveListViewReport> GetListView();
+        ReceiveHeaderReport GetReceiveHeaderByReceiveId(Guid receiveId);
+        IList<ReceiveItemReport> GetReceiveItemById(Guid id);
+        ReceiveSummaryReport GetReceiveSummaryByReceiveId(Guid receiveId);
 	}
 }

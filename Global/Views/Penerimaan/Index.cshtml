@@ -3,7 +3,7 @@
     ViewBag.Title = "Penerimaan";
 }
 
-<h2>Pembayaran</h2>
+<h2>Penerimaan</h2>
 <table id='tblListPenerimaanContainer' cellspacing="0" cellpadding="0" width="100%">
     <tr>
         <td width="80%">
@@ -17,10 +17,10 @@
                     </tr>
                 </thead>
                 <tbody> 
-                    @foreach (var receive in @Model)
+                    @foreach (var receive in Model)
                     {
                         <tr>
-                            <td>@Html.ActionLink(receive.ReceiveNo,"Index","Penerimaan")</td>
+                            <td>@Html.ActionLink(receive.ReceiveNo, "DetailPenerimaan", new { receiveId = receive.ReceiveId })</td>
                             <td>@receive.CustomerName</td>
                             <td>@receive.ReceiveDate.ToString("dd MMM yyyy")</td>
                             <td style="text-align:right;">Rp @receive.Total.ToString("N")</td>

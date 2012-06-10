@@ -122,6 +122,7 @@
     <Content Include="Content\item\list.css" />
     <Content Include="Content\penerimaan\add.css" />
     <Content Include="Content\penerimaan\addItem.css" />
+    <Content Include="Content\penerimaan\detail.css" />
     <Content Include="Content\penyewaan\add.css" />
     <Content Include="Content\penyewaan\addItem.css" />
     <Content Include="Content\penyewaan\detail.css" />
@@ -186,6 +187,7 @@
     <Content Include="Scripts\penerimaan\penerimaan.js" />
     <Content Include="Scripts\penerimaan\selectCustomer.js" />
     <Content Include="Scripts\penyewaan\addItem.js" />
+    <Content Include="Scripts\penyewaan\historyReceive.js" />
     <Content Include="Scripts\penyewaan\selectCustomer.js" />
     <Content Include="Scripts\penyewaan\penyewaan.js" />
     <Content Include="Web.config" />
@@ -285,6 +287,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Penerimaan\AddPenerimaan.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Penerimaan\DetailPenerimaan.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
