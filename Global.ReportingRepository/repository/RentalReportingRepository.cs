@@ -46,5 +46,11 @@ namespace Global.ReportingRepository
         {
             return qryObjectMapper.Map<HistoryReceive>("GetHistoryReceiveByRentalId", new string[1] { "id" }, new object[1] { rentalId }).ToList();
         }
+
+        public SalesMonitoring GetSalesMonitoring(DateTime date)
+        {
+            string d = date.Date.ToString("yyyy-MM-dd");
+            return qryObjectMapper.Map<SalesMonitoring>("GetSalesMonitoring", new string[1] { "date" }, new object[1] { d }).FirstOrDefault();
+        }
     }
 }

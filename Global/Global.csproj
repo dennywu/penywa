@@ -112,6 +112,8 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\StatusItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Scripts\highcharts.js" />
+    <Content Include="Scripts\home\home.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-responsive.css" />
@@ -290,6 +292,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Penerimaan\DetailPenerimaan.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Grafik.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

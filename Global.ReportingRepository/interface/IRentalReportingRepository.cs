@@ -15,5 +15,6 @@ namespace Global.ReportingRepository
         IList<RentalListViewReport> GetReturnedListViewbyCustId(int custId);
         RentalOutstanding GetRentalOutstandingByRentalId(Guid rentalId);
         IList<HistoryReceive> GetHistoryReceiveByRentalId(Guid rentalId);
+        SalesMonitoring GetSalesMonitoring(DateTime date);
 	}
 }
