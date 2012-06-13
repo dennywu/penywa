@@ -1,4 +1,10 @@
 ﻿$(document).ready(function () {
+    GetSalesAmountToday();
+    GetSalesAmountThisMonth();
+    GetSalesAmountThisYear();
+    GetOutstandingAmountToday();
+    GetOutstandingAmountThisMonth();
+    GetOutstandingAmountThisYear();
     $.ajax({
         type: 'GET',
         url: '/Home/MonitoringSalesByPeriode',
@@ -15,6 +21,72 @@
     });
 
 });
+
+function GetSalesAmountToday() {
+    $.ajax({
+        type: 'GET',
+        url: '/Home/SalesAmountToday',
+        dataType: 'json',
+        success: function (data) {
+            $("#TotalRentalToday").text("Rp " + data.Total.toCurrency());
+        }
+    });
+}
+
+function GetSalesAmountThisMonth() {
+    $.ajax({
+        type: 'GET',
+        url: '/Home/SalesAmountThisMonth',
+        dataType: 'json',
+        success: function (data) {
+            $("#TotalRentalThisMonth").text("Rp " + data.Total.toCurrency());
+        }
+    });
+}
+
+function GetSalesAmountThisYear() {
+    $.ajax({
+        type: 'GET',
+        url: '/Home/SalesAmountThisYear',
+        dataType: 'json',
+        success: function (data) {
+            $("#TotalRentalThisYear").text("Rp " + data.Total.toCurrency());
+        }
+    });
+}
+
+function GetOutstandingAmountToday() {
+    $.ajax({
+        type: 'GET',
+        url: '/Home/OutstandingAmountToday',
+        dataType: 'json',
+        success: function (data) {
+            $("#TotalOutstandingToday").text("Rp " + data.Total.toCurrency());
+        }
+    });
+}
+
+function GetOutstandingAmountThisMonth() {
+    $.ajax({
+        type: 'GET',
+        url: '/Home/OutstandingAmountThisMonth',
+        dataType: 'json',
+        success: function (data) {
+            $("#TotalOutstandingThisMonth").text("Rp " + data.Total.toCurrency());
+        }
+    });
+}
+
+function GetOutstandingAmountThisYear() {
+    $.ajax({
+        type: 'GET',
+        url: '/Home/OutstandingAmountThisYear',
+        dataType: 'json',
+        success: function (data) {
+            $("#TotalOutstandingThisYear").text("Rp " + data.Total.toCurrency());
+        }
+    });
+}
 
 function CreateGrafik(sales, salesAmount){
     chart = new Highcharts.Chart({

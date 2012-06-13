@@ -14,4 +14,22 @@ namespace Global.ReportingRepository.model
         public DateTime Date { get; set; }
         public decimal Amount { get; set; }
     }
+
+    [NamedSqlQuery("GetSalesAmountBetweenDate", @"SELECT sum(s.total) as Total FROM tblrentalheader h inner join tblrentalsummary s on h.rentalid=s.rentalid 
+                                            WHERE h.transactiondate BETWEEN @from and @to")]
+    [NamedSqlQuery("GetSalesAmountByDate", @"SELECT sum(s.total) as Total FROM tblrentalheader h inner join tblrentalsummary s on h.rentalid=s.rentalid 
+                                            WHERE h.transactiondate = @date")]
+    public class SalesMonitoringAmount : IViewModel
+    {
+        public decimal Total { get; set; }
+    }
+
+    [NamedSqlQuery("GetSalesOutstandingBetweenDate",@"SELECT sum(o.outstanding) as Total FROM tblrentalheader h inner join tblrentaloutstanding o on h.rentalid=o.rentalid 
+                                            WHERE h.transactiondate BETWEEN @from and @to")]
+    [NamedSqlQuery("GetSalesOutstandingByDate", @"SELECT sum(o.outstanding) as Total FROM tblrentalheader h inner join tblrentaloutstanding o on h.rentalid=o.rentalid 
+                                            WHERE h.transactiondate = @date")]
+    public class OutstandingMonitoringAmount : IViewModel
+    {
+        public decimal Total { get; set; }
+    }
 }

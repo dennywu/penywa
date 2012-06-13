@@ -16,5 +16,9 @@ namespace Global.ReportingRepository
         RentalOutstanding GetRentalOutstandingByRentalId(Guid rentalId);
         IList<HistoryReceive> GetHistoryReceiveByRentalId(Guid rentalId);
         SalesMonitoring GetSalesMonitoring(DateTime date);
+        SalesMonitoringAmount GetSalesAmountByDate(DateTime date);
+        SalesMonitoringAmount GetSalesAmountBetweenDate(DateTime from, DateTime to);
+        OutstandingMonitoringAmount GetOutstandingAmountByDate(DateTime date);
+        OutstandingMonitoringAmount GetOutstandingAmountBetweenDate(DateTime from, DateTime to);
 	}
 }

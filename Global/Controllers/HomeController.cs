@@ -12,7 +12,12 @@ namespace Global.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+        private DateTime utcDate;
         private IRentalReportingRepository rentalreportingRepo;
+        public HomeController()
+        {
+            utcDate = DateTime.SpecifyKind(DateTime.Now.Date, DateTimeKind.Utc);
+        }
         public ActionResult Index()
         {
             return View();
@@ -40,6 +45,45 @@ namespace Global.Controllers
                 sales.Add(monitoring);
             }
             return Json(sales, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult SalesAmountToday()
+        {
+            return Json(RentalReportingRepository.GetSalesAmountByDate(utcDate), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult SalesAmountThisMonth()
+        {
+            DateTime from = utcDate.AddDays(0 - utcDate.Day + 1);
+            int daysOfMonth = DateTime.DaysInMonth(utcDate.Year, utcDate.Month);
+            DateTime to = new DateTime(utcDate.Year, utcDate.Month, daysOfMonth);
+            return Json(RentalReportingRepository.GetSalesAmountBetweenDate(from,to), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult SalesAmountThisYear()
+        {
+            int tahun = utcDate.Year;
+            DateTime from = new DateTime(tahun, 1, 1);
+            int dayOfMonth = DateTime.DaysInMonth(tahun, 12);
+            DateTime to = new DateTime(tahun, 12, dayOfMonth);
+            return Json(RentalReportingRepository.GetSalesAmountBetweenDate(from,to), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult OutstandingAmountToday()
+        {
+            return Json(RentalReportingRepository.GetOutstandingAmountByDate(utcDate), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult OutstandingAmountThisMonth()
+        {
+            DateTime from = utcDate.AddDays(0 - utcDate.Day + 1);
+            int daysOfMonth = DateTime.DaysInMonth(utcDate.Year, utcDate.Month);
+            DateTime to = new DateTime(utcDate.Year, utcDate.Month, daysOfMonth);
+            return Json(RentalReportingRepository.GetOutstandingAmountBetweenDate(from, to), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult OutstandingAmountThisYear()
+        {
+            int tahun = utcDate.Year;
+            DateTime from = new DateTime(tahun, 1, 1);
+            int dayOfMonth = DateTime.DaysInMonth(tahun, 12);
+            DateTime to = new DateTime(tahun, 12, dayOfMonth);
+            return Json(RentalReportingRepository.GetOutstandingAmountBetweenDate(from, to), JsonRequestBehavior.AllowGet);
         }
 
         private string GetPeriod(int month)

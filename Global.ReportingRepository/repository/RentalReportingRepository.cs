@@ -52,5 +52,25 @@ namespace Global.ReportingRepository
             string d = date.Date.ToString("yyyy-MM-dd");
             return qryObjectMapper.Map<SalesMonitoring>("GetSalesMonitoring", new string[1] { "date" }, new object[1] { d }).FirstOrDefault();
         }
+
+        public SalesMonitoringAmount GetSalesAmountByDate(DateTime date)
+        {
+            return qryObjectMapper.Map<SalesMonitoringAmount>("GetSalesAmountByDate", new string[1] { "date" }, new object[1] { date.Date.ToString("yyyy-MM-dd") }).FirstOrDefault();
+        }
+
+        public SalesMonitoringAmount GetSalesAmountBetweenDate(DateTime from, DateTime to)
+        {
+            return qryObjectMapper.Map<SalesMonitoringAmount>("GetSalesAmountBetweenDate", new string[2] { "from", "to" }, new object[2] { from.Date.ToString("yyyy-MM-dd"), to.Date.ToString("yyyy-MM-dd") }).FirstOrDefault();
+        }
+
+        public OutstandingMonitoringAmount GetOutstandingAmountByDate(DateTime date)
+        {
+            return qryObjectMapper.Map<OutstandingMonitoringAmount>("GetSalesOutstandingByDate", new string[1] { "date" }, new object[1] { date.Date.ToString("yyyy-MM-dd") }).FirstOrDefault();
+        }
+
+        public OutstandingMonitoringAmount GetOutstandingAmountBetweenDate(DateTime from, DateTime to)
+        {
+            return qryObjectMapper.Map<OutstandingMonitoringAmount>("GetSalesOutstandingBetweenDate", new string[2] { "from", "to" }, new object[2] { from.Date.ToString("yyyy-MM-dd"), to.Date.ToString("yyyy-MM-dd") }).FirstOrDefault();
+        }
     }
 }

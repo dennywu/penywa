@@ -112,6 +112,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\StatusItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Content\home\home.css" />
     <Content Include="Scripts\highcharts.js" />
     <Content Include="Scripts\home\home.js" />
   </ItemGroup>
