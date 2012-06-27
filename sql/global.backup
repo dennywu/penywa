@@ -1,0 +1,567 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.1.1
+-- Dumped by pg_dump version 9.1.1
+-- Started on 2012-06-25 18:07:35
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 175 (class 3079 OID 11638)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 1914 (class 0 OID 0)
+-- Dependencies: 175
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 164 (class 1259 OID 16422)
+-- Dependencies: 5
+-- Name: tblcustomer; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE tblcustomer (
+    id integer NOT NULL,
+    name character varying(255),
+    alamat character varying(255),
+    kota character varying(255),
+    negara character varying(255),
+    kodepos character varying(255),
+    email character varying(255),
+    outstanding numeric
+);
+
+
+ALTER TABLE public.tblcustomer OWNER TO postgres;
+
+--
+-- TOC entry 163 (class 1259 OID 16420)
+-- Dependencies: 5 164
+-- Name: tblcustomer_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE tblcustomer_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tblcustomer_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1915 (class 0 OID 0)
+-- Dependencies: 163
+-- Name: tblcustomer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE tblcustomer_id_seq OWNED BY tblcustomer.id;
+
+
+--
+-- TOC entry 1916 (class 0 OID 0)
+-- Dependencies: 163
+-- Name: tblcustomer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('tblcustomer_id_seq', 6, true);
+
+
+--
+-- TOC entry 166 (class 1259 OID 16448)
+-- Dependencies: 5
+-- Name: tblitem; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE tblitem (
+    itemid bigint NOT NULL,
+    name character varying(255),
+    deskripsi character varying(255),
+    harga numeric,
+    status character varying(255),
+    dendaperhari numeric
+);
+
+
+ALTER TABLE public.tblitem OWNER TO postgres;
+
+--
+-- TOC entry 165 (class 1259 OID 16446)
+-- Dependencies: 5 166
+-- Name: tblitem_itemid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE tblitem_itemid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tblitem_itemid_seq OWNER TO postgres;
+
+--
+-- TOC entry 1917 (class 0 OID 0)
+-- Dependencies: 165
+-- Name: tblitem_itemid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE tblitem_itemid_seq OWNED BY tblitem.itemid;
+
+
+--
+-- TOC entry 1918 (class 0 OID 0)
+-- Dependencies: 165
+-- Name: tblitem_itemid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('tblitem_itemid_seq', 6, true);
+
+
+--
+-- TOC entry 172 (class 1259 OID 16528)
+-- Dependencies: 5
+-- Name: tblreceiveheader; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE tblreceiveheader (
+    receiveid uuid,
+    receiveno character varying(250),
+    custid integer,
+    receivedate date
+);
+
+
+ALTER TABLE public.tblreceiveheader OWNER TO postgres;
+
+--
+-- TOC entry 174 (class 1259 OID 16537)
+-- Dependencies: 5
+-- Name: tblreceiveitem; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE tblreceiveitem (
+    receiveid uuid,
+    rentalid uuid,
+    denda numeric,
+    payamount numeric,
+    total numeric,
+    totalafterdenda numeric
+);
+
+
+ALTER TABLE public.tblreceiveitem OWNER TO postgres;
+
+--
+-- TOC entry 173 (class 1259 OID 16531)
+-- Dependencies: 5
+-- Name: tblreceivesummary; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE tblreceivesummary (
+    receiveid uuid,
+    total numeric
+);
+
+
+ALTER TABLE public.tblreceivesummary OWNER TO postgres;
+
+--
+-- TOC entry 167 (class 1259 OID 16474)
+-- Dependencies: 5
+-- Name: tblrentalheader; Type: TABLE; Schema: public; Owner: dny; Tablespace: 
+--
+
+CREATE TABLE tblrentalheader (
+    rentalno character varying(250),
+    transactiondate date,
+    duedate date,
+    custid integer,
+    rentalid uuid,
+    status character varying(255)
+);
+
+
+ALTER TABLE public.tblrentalheader OWNER TO dny;
+
+--
+-- TOC entry 169 (class 1259 OID 16488)
+-- Dependencies: 5
+-- Name: tblrentalitem; Type: TABLE; Schema: public; Owner: dny; Tablespace: 
+--
+
+CREATE TABLE tblrentalitem (
+    deskripsi character varying(250),
+    qty integer,
+    harga numeric,
+    total numeric,
+    id bigint NOT NULL,
+    itemid integer,
+    rentalid uuid,
+    denda numeric
+);
+
+
+ALTER TABLE public.tblrentalitem OWNER TO dny;
+
+--
+-- TOC entry 170 (class 1259 OID 16496)
+-- Dependencies: 5 169
+-- Name: tblrentalitem_id_seq; Type: SEQUENCE; Schema: public; Owner: dny
+--
+
+CREATE SEQUENCE tblrentalitem_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tblrentalitem_id_seq OWNER TO dny;
+
+--
+-- TOC entry 1919 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: tblrentalitem_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dny
+--
+
+ALTER SEQUENCE tblrentalitem_id_seq OWNED BY tblrentalitem.id;
+
+
+--
+-- TOC entry 1920 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: tblrentalitem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dny
+--
+
+SELECT pg_catalog.setval('tblrentalitem_id_seq', 50, true);
+
+
+--
+-- TOC entry 171 (class 1259 OID 16518)
+-- Dependencies: 5
+-- Name: tblrentaloutstanding; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE tblrentaloutstanding (
+    rentalid uuid,
+    outstanding numeric
+);
+
+
+ALTER TABLE public.tblrentaloutstanding OWNER TO postgres;
+
+--
+-- TOC entry 168 (class 1259 OID 16482)
+-- Dependencies: 5
+-- Name: tblrentalsummary; Type: TABLE; Schema: public; Owner: dny; Tablespace: 
+--
+
+CREATE TABLE tblrentalsummary (
+    total numeric,
+    rentalid uuid,
+    totaldenda numeric
+);
+
+
+ALTER TABLE public.tblrentalsummary OWNER TO dny;
+
+--
+-- TOC entry 162 (class 1259 OID 16411)
+-- Dependencies: 5
+-- Name: tbluser; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE tbluser (
+    userid integer NOT NULL,
+    username character varying(255),
+    password character varying(255)
+);
+
+
+ALTER TABLE public.tbluser OWNER TO postgres;
+
+--
+-- TOC entry 161 (class 1259 OID 16409)
+-- Dependencies: 162 5
+-- Name: user_userid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE user_userid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_userid_seq OWNER TO postgres;
+
+--
+-- TOC entry 1921 (class 0 OID 0)
+-- Dependencies: 161
+-- Name: user_userid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE user_userid_seq OWNED BY tbluser.userid;
+
+
+--
+-- TOC entry 1922 (class 0 OID 0)
+-- Dependencies: 161
+-- Name: user_userid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('user_userid_seq', 1, true);
+
+
+--
+-- TOC entry 1890 (class 2604 OID 16425)
+-- Dependencies: 163 164 164
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE tblcustomer ALTER COLUMN id SET DEFAULT nextval('tblcustomer_id_seq'::regclass);
+
+
+--
+-- TOC entry 1891 (class 2604 OID 16451)
+-- Dependencies: 166 165 166
+-- Name: itemid; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE tblitem ALTER COLUMN itemid SET DEFAULT nextval('tblitem_itemid_seq'::regclass);
+
+
+--
+-- TOC entry 1892 (class 2604 OID 16498)
+-- Dependencies: 170 169
+-- Name: id; Type: DEFAULT; Schema: public; Owner: dny
+--
+
+ALTER TABLE tblrentalitem ALTER COLUMN id SET DEFAULT nextval('tblrentalitem_id_seq'::regclass);
+
+
+--
+-- TOC entry 1889 (class 2604 OID 16414)
+-- Dependencies: 161 162 162
+-- Name: userid; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE tbluser ALTER COLUMN userid SET DEFAULT nextval('user_userid_seq'::regclass);
+
+
+--
+-- TOC entry 1900 (class 0 OID 16422)
+-- Dependencies: 164
+-- Data for Name: tblcustomer; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY tblcustomer (id, name, alamat, kota, negara, kodepos, email, outstanding) FROM stdin;
+5	Elsia	fdbhcb	batam	Indonesia	21432	gaktau@test.com	300000
+6	Isep	Kurang Tau	Batam	Indonesia	21432	isep@inforsys.co.id	0
+4	Apin Wu	Gak tau	Bata,	Indonesia	21987	denny.wu13@gmail.com	300000
+3	Denny Wu	Komplek Baloi View Blok E1 No 19	Batam	Indonesia	21432	denny@inforsys.co.id	60000
+\.
+
+
+--
+-- TOC entry 1901 (class 0 OID 16448)
+-- Dependencies: 166
+-- Data for Name: tblitem; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY tblitem (itemid, name, deskripsi, harga, status, dendaperhari) FROM stdin;
+4	BP 2002 ZT	Avanza Black	300000	Aktif	30000
+5	BP 1313 ZT	Avanza White	300000	Aktif	30000
+6	Test	test	300000	Aktif	50000
+\.
+
+
+--
+-- TOC entry 1906 (class 0 OID 16528)
+-- Dependencies: 172
+-- Data for Name: tblreceiveheader; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY tblreceiveheader (receiveid, receiveno, custid, receivedate) FROM stdin;
+c80f24b6-7db0-4012-a97b-133df9848a50	RECEIVE-fee0884e	3	2012-06-10
+d8b64256-feda-4bd2-9034-fcaae941f2e6	RCV-2eec9659	3	2012-06-15
+fa49c492-3a42-4fe0-8cbc-f78545cf677c	RCV-8b2ad839	5	2012-07-27
+dac53ed0-ab39-48f8-ac95-37c5b96b5466	RCV-16e4d699	6	2012-07-29
+\.
+
+
+--
+-- TOC entry 1908 (class 0 OID 16537)
+-- Dependencies: 174
+-- Data for Name: tblreceiveitem; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY tblreceiveitem (receiveid, rentalid, denda, payamount, total, totalafterdenda) FROM stdin;
+c80f24b6-7db0-4012-a97b-133df9848a50	5c131e5a-f9a3-41fb-a685-c330583b207a	60000	500000	600000	660000
+d8b64256-feda-4bd2-9034-fcaae941f2e6	5c131e5a-f9a3-41fb-a685-c330583b207a	60000	100000	600000	660000
+fa49c492-3a42-4fe0-8cbc-f78545cf677c	7de74404-148f-4df1-93f5-9ba7f28e6a31	0	1500000	1500000	1500000
+dac53ed0-ab39-48f8-ac95-37c5b96b5466	b3b13a33-7335-4653-985a-81ecdff37fe5	0	300000	300000	300000
+\.
+
+
+--
+-- TOC entry 1907 (class 0 OID 16531)
+-- Dependencies: 173
+-- Data for Name: tblreceivesummary; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY tblreceivesummary (receiveid, total) FROM stdin;
+c80f24b6-7db0-4012-a97b-133df9848a50	500000
+d8b64256-feda-4bd2-9034-fcaae941f2e6	100000
+fa49c492-3a42-4fe0-8cbc-f78545cf677c	1500000
+dac53ed0-ab39-48f8-ac95-37c5b96b5466	300000
+\.
+
+
+--
+-- TOC entry 1902 (class 0 OID 16474)
+-- Dependencies: 167
+-- Data for Name: tblrentalheader; Type: TABLE DATA; Schema: public; Owner: dny
+--
+
+COPY tblrentalheader (rentalno, transactiondate, duedate, custid, rentalid, status) FROM stdin;
+RENTAL-fa4d8a95	2012-06-07	2012-06-08	3	5c131e5a-f9a3-41fb-a685-c330583b207a	Return
+RENTAL-f641d71d	2012-06-08	2012-06-09	4	456cd759-71ec-4bc2-9748-9cb06007d305	Approved
+RENTAL-74acb3ba	2012-07-24	2012-07-26	5	7de74404-148f-4df1-93f5-9ba7f28e6a31	Approved
+RENTAL-34134dae	2012-07-12	2012-07-13	5	781ce62b-3e2a-4444-8748-826bca84ab87	Approved
+RENT-438258d	2012-07-25	2012-07-27	6	b3b13a33-7335-4653-985a-81ecdff37fe5	Return
+\.
+
+
+--
+-- TOC entry 1904 (class 0 OID 16488)
+-- Dependencies: 169
+-- Data for Name: tblrentalitem; Type: TABLE DATA; Schema: public; Owner: dny
+--
+
+COPY tblrentalitem (deskripsi, qty, harga, total, id, itemid, rentalid, denda) FROM stdin;
+Avanza White	1	300000	330000	44	5	5c131e5a-f9a3-41fb-a685-c330583b207a	30000
+Avanza Black	1	300000	330000	45	4	5c131e5a-f9a3-41fb-a685-c330583b207a	30000
+Avanza White	1	300000	300000	46	5	456cd759-71ec-4bc2-9748-9cb06007d305	\N
+test	3	300000	900000	47	6	7de74404-148f-4df1-93f5-9ba7f28e6a31	\N
+Avanza White	2	300000	600000	48	5	7de74404-148f-4df1-93f5-9ba7f28e6a31	\N
+test	1	300000	300000	49	6	781ce62b-3e2a-4444-8748-826bca84ab87	\N
+Avanza White	1	300000	300000	50	5	b3b13a33-7335-4653-985a-81ecdff37fe5	0
+\.
+
+
+--
+-- TOC entry 1905 (class 0 OID 16518)
+-- Dependencies: 171
+-- Data for Name: tblrentaloutstanding; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY tblrentaloutstanding (rentalid, outstanding) FROM stdin;
+456cd759-71ec-4bc2-9748-9cb06007d305	300000
+5c131e5a-f9a3-41fb-a685-c330583b207a	60000
+7de74404-148f-4df1-93f5-9ba7f28e6a31	0
+781ce62b-3e2a-4444-8748-826bca84ab87	300000
+b3b13a33-7335-4653-985a-81ecdff37fe5	0
+\.
+
+
+--
+-- TOC entry 1903 (class 0 OID 16482)
+-- Dependencies: 168
+-- Data for Name: tblrentalsummary; Type: TABLE DATA; Schema: public; Owner: dny
+--
+
+COPY tblrentalsummary (total, rentalid, totaldenda) FROM stdin;
+660000	5c131e5a-f9a3-41fb-a685-c330583b207a	60000
+300000	456cd759-71ec-4bc2-9748-9cb06007d305	\N
+1500000	7de74404-148f-4df1-93f5-9ba7f28e6a31	\N
+300000	781ce62b-3e2a-4444-8748-826bca84ab87	\N
+300000	b3b13a33-7335-4653-985a-81ecdff37fe5	0
+\.
+
+
+--
+-- TOC entry 1899 (class 0 OID 16411)
+-- Dependencies: 162
+-- Data for Name: tbluser; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY tbluser (userid, username, password) FROM stdin;
+1	test	test
+\.
+
+
+--
+-- TOC entry 1896 (class 2606 OID 16430)
+-- Dependencies: 164 164
+-- Name: tblcustomer_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY tblcustomer
+    ADD CONSTRAINT tblcustomer_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1898 (class 2606 OID 16456)
+-- Dependencies: 166 166
+-- Name: tblitem_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY tblitem
+    ADD CONSTRAINT tblitem_pkey PRIMARY KEY (itemid);
+
+
+--
+-- TOC entry 1894 (class 2606 OID 16419)
+-- Dependencies: 162 162
+-- Name: user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY tbluser
+    ADD CONSTRAINT user_pkey PRIMARY KEY (userid);
+
+
+--
+-- TOC entry 1913 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2012-06-25 18:07:35
+
+--
+-- PostgreSQL database dump complete
+--
+

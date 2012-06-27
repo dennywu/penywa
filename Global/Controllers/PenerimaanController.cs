@@ -56,7 +56,7 @@ namespace Global.Controllers
             decimal totalPayAmount = CreateReceiveSummary(_receive);
             RecalculateRentaloutstanding(_receive);
             CustomerOutstanding.MinusOutstanding(_receive.CustId, totalPayAmount);
-            return Json(new { redirectTo = Url.Action("Index", "Penerimaan") }, JsonRequestBehavior.AllowGet);
+            return Json(new { redirectTo = Url.Action("Index", "DetailPenerimaan", new { receiveId = receiveId }) }, JsonRequestBehavior.AllowGet);
         }
 
         private void RecalculateRentaloutstanding(Receive _receive)
